@@ -87,12 +87,13 @@ const SignupForm = (props) => {
           console.log(response.data);
           console.log(response.accessToken)
           setSuccess(true);
-          setTimeout(()=>{
-            setIsSubmit(false);
-            setSuccess(false);
-            // navigate("/home",{onFormSwitch:"login"});
-            props.onFormSwitch("login");
-          },"3000")
+          props.onFormSwitch("login");
+          // setTimeout(()=>{
+          //   setIsSubmit(false);
+          //   setSuccess(false);
+          //   // navigate("/home",{onFormSwitch:"login"});
+          //   props.onFormSwitch("login");
+          // },"3000")
         }
       }else{
         setIsInvalid(true);
