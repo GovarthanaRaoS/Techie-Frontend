@@ -10,6 +10,10 @@
     justify-content: space-between;
     align-items: center;
 }
+.title-logo a{
+    text-decoration: none;
+    color: aliceblue;
+}
 .dash-header-container{
     display: flex;
     justify-content: space-between;
