@@ -59,7 +59,7 @@ const Contact = () => {
                 message: message
             }
             console.log("Details: ",details);
-            axios.post('http://localhost:9092/contact',{
+            axios.post('https://techie-webapp-api.onrender.com/contact',{
             name: name,
             email: email,
             subject: subject,
