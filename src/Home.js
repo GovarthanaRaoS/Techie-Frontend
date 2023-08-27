@@ -60,7 +60,7 @@ const Home = (props) => {
     }
 
     const handleGreet = () =>{
-        axios.get("https://techie-webapp.onrender.com/greet").then(res=>console.log(res.data))
+        axios.get("https://techie-webapp-api.onrender.com/greet").then(res=>console.log(res.data))
     }
 
   return (
