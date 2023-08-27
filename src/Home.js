@@ -87,7 +87,7 @@ const Home = (props) => {
             <Outlet/>
         </main>)}
         <footer>
-            <p className='copyright'>Copyright &copy;2023. Designed by Govarthana Rao S<button onClick={handleGreet}>Greet</button><button onClick={handleShow}>Show Members</button></p>
+            <p className='copyright'>Copyright &copy;2023. Designed by Govarthana Rao S</p>
         </footer>
     </div>
   )
