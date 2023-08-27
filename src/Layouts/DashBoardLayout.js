@@ -43,7 +43,7 @@ const DashBoardLayout = () => {
   return (
     <div className='dashboard-container'>
         <header className='dash-header-container'>
-            <h2 className='title-logo'>Techie</h2>
+            <h2 className='title-logo'><Link to='/'>Techie</Link></h2>
             <button className='logoutButt' onClick={handleLogout}>Logout</button>
         </header>
         <main>
