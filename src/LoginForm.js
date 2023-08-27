@@ -57,12 +57,15 @@ const LoginForm = (props) => {
         setTimeout(()=>{
           setInvalidCreds(false)
         },'3000')
+        console.log('Invalid');
       }else if(response.data === "Account does not exist"){
         setAccNot(true);
         setTimeout(()=>{
           setAccNot(false)
         },'3000')
+        console.log('Acc does not exist');
       }else if(response.data){
+        console.log('Success');
         setSuccess(true);
         // setLoginEmail("");
         // setLoginPassword("");
