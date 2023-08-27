@@ -21,10 +21,10 @@ const PreviousResults = () => {
                     navigate('/');
                 }else{
                     setUser(res.data);
-                    if(res.data.message){
-                        setErrMsg('No records found');
-                        return;
-                    }
+                    // if(res.data.message){
+                    //     setErrMsg('No records found');
+                    //     return;
+                    // }
                     const getResults = async() =>{
 
                         const response = await axios.post("https://techie-webapp-api.onrender.com/getprevresults",{email: res.data.email});
@@ -32,7 +32,7 @@ const PreviousResults = () => {
                         console.log('Retreived results: ',response.data);
                         setUserData(response.data)
                         setIsPending(false);
-                        if(response.data.length===1){
+                        if(response.data==='invalid'){
                             setErrMsg('No records found');
                             console.log(errMsg)
                         }
