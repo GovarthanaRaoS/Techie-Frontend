@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.dashboard-container{
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.dash-header-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #303030;
+    color: aliceblue;
+    width: 100%;
+}
+.dash-main-container>h2{
+    margin-left: 25px;
+}
+
+.cards-container{
+    /* background-color: navy; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    /* width: 90%; */
+    /* display: inline; */
+}
+.card-container{
+    cursor: pointer;
+    margin: 15px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    text-align: center;
+    width: 250px;
+    background-color: #303030;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-container>p,h2,button{
+    margin-block: 10px;
+}
+.card-container p{
+    text-align: justify;
+}
+.card-container .takeQuizButt{
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+    background-color: #303030;
+    cursor: pointer;
+}
+.card-container .takeQuizButt:hover{
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+}
+.card-container:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+.quiz-topics-container{
+    border-radius: 25px;
+    padding-block: 20px;
+    width: 90%;
+    margin-inline: auto;
+    background-color: #303030;
+}
+.topic-buttons-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.topic-buttons{
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: aliceblue;
+    background-color: #303030;
+    border: 0.3px solid aliceblue;
+    transition: all 0.3s ease 0s;
+}
+.topic-buttons:hover{
+    color: #303030;
+    background-color: aliceblue;
+    border: 0.3px solid #303030;
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
+}
+.quiz-topics-container>h3{
+    color: aliceblue;
+    font-size: 28px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+}
+
+@media screen and (max-width:870px) {
+    .welcome{
+        text-align: center;
+    }
+}

@@ -1,0 +1,301 @@
+.loading{
+    text-align: center;
+}
+.question-container{
+    margin-block: 15px;
+    background-color: #303030;
+    color: aliceblue;
+    width: 800px;
+    /* padding-left: 30px; */
+    padding-block: 15px;
+    border-radius: 25px;
+    
+}
+.q-cont{
+    /* background-color: blue; */
+    margin-inline: auto;
+    width: 90%;
+}
+.q-cont h3{
+    padding-block: 10px;
+}
+
+.q-cont ul{
+    list-style: none;
+}
+
+.q-cont .question{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.q-cont li{
+    cursor: pointer;
+    border-radius: 10px;
+    border: 0.3px solid aliceblue;
+    background-color: #303030;
+    color: aliceblue;
+    padding: 10px ;
+    margin-block: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease 0s;
+}
+.q-cont li:hover{
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+}
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
+.prevButt, .nextButt{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+    transition: all 0.3s ease 0s;
+}
+.prevButt:hover, .nextButt:hover{
+    background-color: #303030;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+}
+.activeli{
+    background-color: aliceblue !important;
+    color: #303030 !important;
+}
+.submitButt{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+    transition: all 0.3s ease 0s;
+}
+.submitButt:hover{
+    background-color: #303030;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+}
+.submit-cont{
+    text-align: center;
+}
+.msg{
+    margin-block: 10px;
+    text-align: center;
+}
+.scoreboard{
+    text-align: center;
+    line-height: 1.6;
+}
+.takeTestButt{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 0.3px solid #303030;
+    color: #303030;
+    background-color: aliceblue;
+    transition: all 0.3s ease 0s;
+}
+.takeTestButt:hover{
+    background-color: #303030;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+}
+.table-container{
+    counter-reset: rowNumber;
+    /* border: 0.5px solid black; */
+}
+.table-container table{
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 10px;
+}
+/* .table-container tr{
+    counter-increment: rowNumber;
+} */
+.table-container tr td:first-child::before{
+    counter-increment: rowNumber;
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+.table-container thead{
+    background-color: #303030;
+    color: aliceblue;
+}
+.table-container th,td{
+    border: 0.5px solid black;
+}
+.table-container td,th{
+    padding: 10px 15px;
+}
+tbody tr:nth-child(odd){
+    background-color: aliceblue;
+    color: #303030;
+}
+tbody tr:nth-child(even){
+    background-color: rgb(187, 206, 223);
+    color: #303030;
+}
+.no-records{
+    text-align: center;
+    background-color: #303030;
+    color: aliceblue;
+    padding: 15px 25px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+.update-container{
+    background-color: #303030;
+    color: aliceblue;
+    padding-block: 20px;
+    border-radius: 25px;
+    margin-block: 15px;
+}
+.update-container legend{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 25px;
+}
+.update-container label{
+    text-align: right;
+    /* padding-inline: 10px; */
+    font-weight: bold;
+    display: inline-block;
+    width: 180px;
+    /* background-color: red; */
+}
+.name-container, .email-container ,.phoneno-container, .highgrad-container, .college-container, .company-container, .profession-container{
+    margin-block: 10px;
+}
+.update-container input[type=text], .update-container input[type=email], select{
+    padding-left: 10px;
+    padding-block: 6px;
+    width: 225px;
+    margin-right: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none;
+    border: 0.3px solid #303030;
+}
+.update-container input[type=text]:focus, .update-container input[type=email]:focus, select:focus{
+    border: 0.3px solid purple;
+}
+.update-butt-container{
+    text-align: center;
+}
+.updateButt{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 0.3px solid #303030;
+}
+.updateButt:hover{
+    border: 0.3px solid aliceblue;
+    color: aliceblue;
+    background-color: #303030;
+}
+.err-msg{
+    margin-block: 5px;
+    display: block;
+    text-align: center;
+    color: red;
+    width: 70%;
+    margin-inline: auto;
+}
+.isCollegeGrad-container{
+    text-align: center;
+}
+.isCollegeGrad-container label{
+    display: inline-block;
+    width: 250px;
+}
+.isEmployee-container{
+    text-align: center;
+}
+.isEmployee-container label{
+    display: inline-block;
+    width: 250px;
+}
+
+.previous-results-container{
+    padding: 20px;
+    margin-inline: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .question-container{
+        width: 700px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .question-container{
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .question-container{
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .question-container{
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .question-container{
+        width: 300px;
+    }
+    /* .update-container{
+        text-align: center;
+    } */
+    .update-container{
+        padding-inline: 20px;
+    }
+    .update-container label{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .update-container input[type=text], .update-container input[type=email], select{
+        width: 100%;
+        text-align: center;
+    }
+    .name-container, .email-container ,.phoneno-container, .highgrad-container, .college-container, .company-container, .profession-container{
+        text-align: center;
+        padding-block: 10px;
+    }
+    .isEmployee-container label{
+        display: inline;
+        width: 90%;
+        padding-left: 5px;
+    }
+    .isCollegeGrad-container label{
+        display: inline;
+        width: 90%;
+        padding-left: 5px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .question-container{
+        width: 280px;
+    }
+}

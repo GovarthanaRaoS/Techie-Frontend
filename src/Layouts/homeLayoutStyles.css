@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.homelayout-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.home-container{
+    margin-block: 15px;
+}
+
+.nav-butt-container{
+    display: none;
+}
+#check{
+    display: none;
+}
+.navbar-container{
+    background-color: #303030;
+    color: aliceblue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 15px;
+}
+.title-logo{
+    font-size: 32px;
+    font-weight: bolder;
+    font-family: 'Dancing Script', cursive;
+    padding-left: 20px;
+}
+.menu-list{
+    list-style: none;
+}
+.menu-list li{
+    display: inline-block;
+    margin-inline: 20px;
+}
+.menu-list li a{
+    text-decoration: none;
+    color: aliceblue;
+}
+.homelayout-container{
+    width: 100%;
+}
+.home-container{
+    width: 90%;
+    padding: 20px;
+    border-radius: 20px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #303030;
+}
+.description{
+    margin-top: 20px;
+}
+.preview-container{
+    color: aliceblue;
+    width: 60%;
+    padding-left: 10px;
+    text-align: justify;
+}
+footer{
+    width: 100%;
+    text-align: center;
+    background-color: #303030;
+    color: aliceblue;
+    padding-block: 10px;
+}
+
+.prev-title{
+    font-size: 32px;
+    font-weight: bolder;
+    /* font-family: 'Dancing Script', cursive; */
+}
+
+.login-register-container{
+    width: 275px;
+    text-align: center;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 15px;
+}
+.login-register-container fieldset{
+    border: none;
+}
+.login-register-container legend{
+    text-align: left;
+}
+.userEmail-container{
+    margin-block: 15px;
+}
+.userPassword-container{
+    margin-block: 15px;
+}
+.login-register-container input[type=text],.login-register-container input[type=email],.login-register-container input[type=password]{
+    width: 225px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    background-color: aliceblue;
+    border-bottom: 1px solid #303030;
+}
+.login-register-container input[type=text]:focus,.login-register-container input[type=email]:focus,.login-register-container input[type=password]:focus{
+    border-bottom: 1px solid purple;
+}
+.login-register-container p{
+    margin-block: 15px;
+}
+.loginButt{
+    margin-block: 15px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0.3px solid aliceblue;
+    background-color: #303030;
+    color: aliceblue;
+    cursor: pointer;
+}
+.signupButt{
+    margin-block: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0.3px solid #303030;
+    background-color: aliceblue;
+    color: #303030;
+    cursor: pointer;
+}
+.loginButt:hover{
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+}
+.signupButt:hover{
+    background-color: #303030;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+}
+
+/* signup form styles */
+.userName-container, .userEmail-container, .userPassword-container, .confirmPassword-container{
+    margin-block: 15px;
+}
+
+.offscreen{
+    position: absolute;
+    left: -9999px;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+    text-align: justify;
+}
+
+.rememberMe-container{
+    text-align: left;
+}
+.rememberMe-container label{
+    margin-left: 5px;
+}
+.logoutButt{
+    cursor: pointer;
+    background-color: #303030;
+    color: aliceblue;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 0.3px solid aliceblue;
+    transition: all 0.3s ease 0s;
+}
+.logoutButt:hover{
+    background-color: aliceblue;
+    color: #303030;
+    border: 0.3px solid #303030;
+}
+.about-container{
+    text-align: justify;
+    line-height: 1.6;
+    margin-inline: auto;
+    margin-block: 15px;
+    background-color: #303030;
+    color: aliceblue;
+    width: 70%;
+    padding: 20px 50px;
+    border-radius: 25px;
+}
+.about-container h3{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.high{
+    font-weight: bolder;
+}
+.login-container fieldset{
+    margin-inline: auto;
+}
+.error-message{
+    margin-top: 5px;
+    color: red;
+    display: block;
+}
+.success-message{
+    display: block;
+    color: green;
+}
+
+.menu-list-container{
+    padding: 20px;
+    background-color: #303030;
+    color: aliceblue;
+    height: 100%;
+}
+.menu-list-container ul{
+    list-style: none;
+}
+.menu-list-container li{
+    margin-block: 10px;
+}
+.menu-list-container a{
+    text-decoration: none;
+}
+
+.contact-container{
+    margin-block: 15px;
+    background-color: #303030;
+    color: aliceblue;
+    padding: 20px 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 400px;
+}
+.contact-container label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+.contact-container input[type=text],.contact-container input[type=email]{
+    width: 275px;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    background-color: white;
+    padding-left: 5px;
+}
+.contact-name-container, .contact-email-container, .contact-subject-container, .contact-message-container{
+    margin-block: 15px;
+}
+.contact-container textarea{
+    width: 275px;
+    border-radius: 10px;
+    outline: none;
+    padding: 10px;
+}
+.sendButt{
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 0.3px solid #303030;
+    transition: all 0.3s ease 0s;
+}
+.sendButt:hover{
+    background-color: #303030;
+    color: aliceblue;
+    border: 0.3px solid aliceblue;
+}
+
+.contact-container .success-message{
+    width: 80%;
+    text-align: center;
+    margin-inline: auto;
+}
+.contact-welcome{
+    width: 80%;
+    text-align: justify;
+    display: inline-block;
+}
+
+
+@media screen and (max-width: 1000px){
+    .description{
+        width: 90%;
+    }
+    .slogan{
+        width: 80%;
+    }
+}
+@media screen and (max-width: 700px) {
+    .home-container{
+        flex-direction: column;
+    }
+    .preview-container{
+        padding-bottom: 40px;
+        text-align: justify;
+        width: 90%;
+    }
+    .preview-container>h1{
+        text-align: center;
+    }
+    .slogan-container{
+        text-align: center;
+    }
+    .description{
+        margin-inline: auto;
+    }
+}
+@media screen and (max-width:350px) {
+    /* .slogan{
+        width: 50%;
+    } */
+    .login-register-container{
+        width: 225px;
+    }
+    .login-register-container input[type=text],.login-register-container input[type=email],.login-register-container input[type=password]{
+        width: 180px;
+        padding: 5px;
+        outline: none;
+        border: none;
+        background-color: aliceblue;
+        border-bottom: 1px solid #303030;
+    }
+}
+@media screen and (max-width: 450px) {
+    .homelayout-container{
+        width: 100%;
+    }
+    /* .home-container{
+        padding-inline: 10px;
+    } */
+
+    
+}
+@media screen and (max-width: 600px) {
+    .menu-list{
+        display: none;
+    }
+    .menu-list-container{
+        flex: auto;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+    }
+    .menu-list-container a{
+        color: aliceblue;
+    }
+    .menu-list-container li{
+        margin-block: 25px;
+    }
+    .menu-list-container ul{
+        margin: auto 0; 
+    }
+    .nav-butt-container{
+        display: block;
+    }
+    .menuButt{
+        margin-right: 15px;
+        cursor: pointer;
+        padding: 5px 10px;
+        background-color: aliceblue;
+        color: #303030;
+        border-radius: 5px;
+        border: 0.3px solid #303030;
+        transition: all 0.3s ease 0s;
+    }
+    .menuButt:hover{
+        background-color: #303030;
+        color: aliceblue;
+        border: 0.3px solid aliceblue;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .about-container{
+        width: 90%;
+    }
+    .contact-container{
+        width: 300px;
+    }
+    .contact-container input[type=text],.contact-container input[type=email]{
+        width: 200px;
+        height: 30px;
+        border-radius: 5px;
+        outline: none;
+        background-color: white;
+        padding-left: 5px;
+    }
+    .contact-name-container, .contact-email-container, .contact-subject-container, .contact-message-container{
+        margin-block: 15px;
+    }
+    .contact-container textarea{
+        width: 200px;
+        border-radius: 10px;
+        outline: none;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 310px) {
+    .contact-container{
+        width: 250px;
+    }
+    .contact-container input[type=text],.contact-container input[type=email]{
+        width: 180px;
+        height: 30px;
+        border-radius: 5px;
+        outline: none;
+        background-color: white;
+        padding-left: 5px;
+    }
+    .contact-name-container, .contact-email-container, .contact-subject-container, .contact-message-container{
+        margin-block: 15px;
+    }
+    .contact-container textarea{
+        width: 180px;
+        border-radius: 10px;
+        outline: none;
+        padding: 10px;
+    }
+}
