@@ -32,7 +32,7 @@ const PreviousResults = () => {
                         console.log('Retreived results: ',response.data);
                         setUserData(response.data)
                         setIsPending(false);
-                        if(response.data==='invalid'){
+                        if(response.data.length===0){
                             setErrMsg('No records found');
                             console.log(errMsg)
                         }
