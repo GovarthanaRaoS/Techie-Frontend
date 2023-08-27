@@ -16,20 +16,20 @@ const Music = () => {
 
     const navigate = useNavigate();
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    //     if(localStorage.getItem('token')!==''){
-    //         axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
-    //             console.log(res.data);
-    //             if(res.data ==='Token invalid'){
-    //                 localStorage.removeItem('token');
-    //                 navigate('/');
-    //             }else{
-    //                 setUser(res.data);
-    //             }
-    //         })
-    //     }
-    // },[])
+        if(localStorage.getItem('token')!==''){
+            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+                console.log(res.data);
+                if(res.data ==='Token invalid'){
+                    localStorage.removeItem('token');
+                    navigate('/');
+                }else{
+                    setUser(res.data);
+                }
+            })
+        }
+    },[])
 
   useEffect(()=>{
       
