@@ -32,7 +32,7 @@ const DashBoardLayout = () => {
     const handleLogout = () =>{
         const clearSession = async() =>{
             setIsLogged(false);
-            const response = await axios.post("http://localhost:9092/logout",{},{withCredentials: true});
+            const response = await axios.post("https://techie-webapp-api.onrender.com/logout",{},{withCredentials: true});
             console.log("Response for logout: ",response.data);
             localStorage.removeItem('token');
             navigate('/')
