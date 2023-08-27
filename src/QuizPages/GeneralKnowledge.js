@@ -20,7 +20,7 @@ const GeneralKnowledge = () => {
     useEffect(()=>{
 
         if(localStorage.getItem('token')!==''){
-            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log(res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
