@@ -132,7 +132,7 @@ const GeneralKnowledge = () => {
                 const jsDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 console.log('Date: ',jsDate);
                 const saveScores = async() =>{
-                    const response = await axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate});
+                    const response = await axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate},{withCredentials: true});
                     console.log(response.data);
                 }
                 saveScores();
