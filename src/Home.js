@@ -63,6 +63,10 @@ const Home = (props) => {
         axios.get("https://techie-webapp-api.onrender.com/greet").then(res=>console.log(res.data))
     }
 
+    const handleShow = () =>{
+        axios.get("https://techie-webapp-api.onrender.com/showmembers").then(res=>console.log(res.data));
+    }
+
   return (
     <div className='homelayout-container'>
         <nav className='navbar-container'>
@@ -83,7 +87,7 @@ const Home = (props) => {
             <Outlet/>
         </main>)}
         <footer>
-            <p className='copyright'>Copyright &copy;2023. Designed by Govarthana Rao S<button onClick={handleGreet}>Greet</button></p>
+            <p className='copyright'>Copyright &copy;2023. Designed by Govarthana Rao S<button onClick={handleGreet}>Greet</button><button onClick={handleShow}>Show Members</button></p>
         </footer>
     </div>
   )
