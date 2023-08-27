@@ -72,10 +72,11 @@ const LoginForm = (props) => {
         const toki = response.data.token;
         localStorage.setItem('token',toki);
         setToken('');
-        setTimeout(()=>{
-          setSuccess(false);
-          navigate('/dashboard2');
-        },'3000');
+        navigate('/dashboard2');
+        // setTimeout(()=>{
+        //   setSuccess(false);
+        //   navigate('/dashboard2');
+        // },'3000');
       }
     }else{
       console.log("Invalid credentials input")
