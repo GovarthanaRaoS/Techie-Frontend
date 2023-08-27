@@ -19,7 +19,7 @@ const Music = () => {
     useEffect(()=>{
 
         if(localStorage.getItem('token')!==''){
-            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log(res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
@@ -130,7 +130,7 @@ const Music = () => {
               setScr(score);
               const jsDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 console.log('Date: ',jsDate);
-                axios.post("http://localhost:9092/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate}).then(res=>console.log(res.data))
+                axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate}).then(res=>console.log(res.data))
               // console.log('set score: ',score);
               // navigate('/dashboard2/taketest/scoreboard',{state:{score: score, category: questions[0].category}});
           },3000);
