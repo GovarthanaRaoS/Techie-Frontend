@@ -57,6 +57,7 @@ const Music = () => {
   const handleNext = () =>{
       setCurrentQuestion(currentQuestion+1);
       console.log('next: ',currentQuestion+1);
+    setAns('');
   }
 
   const [ans, setAns] = useState('');
@@ -64,6 +65,7 @@ const Music = () => {
 
   const handlePrevious = () =>{
       setCurrentQuestion(currentQuestion-1);
+    setAns('');
   }
 
   const handleClicked = (ind,ans) =>{
@@ -152,7 +154,7 @@ const Music = () => {
 
               {choices[currentQuestion].map(choice=>{
                   return(
-                      <li key={choice} className={(scoreSheet.findIndex(x=>x.index-1 === currentQuestion)>=0 && scoreSheet.findIndex(x=>x.selectedAns===`${choice}`)>=0) || ans === `${choice}` ?'activeli': ''} onClick={()=>handleClicked(currentQuestion+1,choice)}>{choice}</li>
+                      <li key={choice} className={(scoreSheet.findIndex(x=>(x.selectedAns===`${choice}` && x.index-1===currentQuestion))>=0) || ans === `${choice}` ?'activeli': ''} onClick={()=>handleClicked(currentQuestion+1,choice)}>{choice}</li>
                   )
               })}
 
