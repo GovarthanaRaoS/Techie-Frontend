@@ -16,6 +16,9 @@
     margin-inline: auto;
     width: 90%;
 }
+.q-cont .options-list{
+    padding-left: 0;
+}
 .q-cont h3{
     padding-block: 10px;
 }
