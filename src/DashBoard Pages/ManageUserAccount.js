@@ -122,9 +122,9 @@ const ManageUserAccount = () => {
     <div className='manage-user-account-container'>
         {isPending && <p>Loading users</p>}
         {!isPending && <div className="manage-user-account-subcontainer">
-            <h3>User details</h3>
             {user.length === 0 && <p>No User found</p>}
-            <div className="table-containers">
+            {user.length !== 0 && <div className="table-containers">
+                <h3>User details</h3>
                 <table className='responsive-table'>
                     <thead>
                         <tr>
@@ -160,7 +160,7 @@ const ManageUserAccount = () => {
                         })}
                     </tbody>
                 </table>
-            </div>
+            </div>}
         </div>}
     </div>
   )

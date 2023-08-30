@@ -52,9 +52,9 @@ const PreviousResults = () => {
 
         {isPending && <p>Fetching results</p>}
 
-        {!isPending && errMsg.length!==0 && <p>No records found</p>}
+        {!isPending && userData.length ===0 && <p>No records found</p>}
 
-        {!isPending && errMsg.length === 0 &&
+        {!isPending && userData.length !== 0 &&
         <div className='table-container'>
             <table>
                 <thead>
