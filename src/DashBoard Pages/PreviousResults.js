@@ -50,9 +50,9 @@ const PreviousResults = () => {
   return (
     <div className='previous-results-container'>
 
-        {isPending && <p>Fetching results</p>}
+        {isPending && <p className='no-records'>Fetching results</p>}
 
-        {!isPending && userData.length ===0 && <p>No records found</p>}
+        {!isPending && userData.length ===0 && <p className='no-records'>No records found</p>}
 
         {!isPending && userData.length !== 0 &&
         <div className='table-container'>
@@ -78,7 +78,7 @@ const PreviousResults = () => {
             </table>
         </div>
         }
-        {!isPending && errMsg.length>0 && <p className='no-records'>No Records found</p>}
+        {/* {!isPending && errMsg.length>0 && <p className='no-records'>No Records found</p>} */}
     </div>
   )
 }

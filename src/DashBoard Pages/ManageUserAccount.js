@@ -122,8 +122,8 @@ const ManageUserAccount = () => {
     <div className='manage-user-account-container'>
         {isPending && <p>Loading users</p>}
         {!isPending && <div className="manage-user-account-subcontainer">
-            {(user.length === 0 || (user.length ===1 && user.email === currentUser.email)) && <p>No User found</p>}
-            {user.length !== 0 && <div className="table-containers">
+            {(user.length === 0 || (user.length === 1 && user.email === currentUser.email)) && <p className='no-records'>No User found</p>}
+            {(user.length !== 0 ||  (user.length === 1 && user.email !== currentUser.email)) && <div className="table-containers">
                 <h3>User details</h3>
                 <table className='responsive-table'>
                     <thead>
