@@ -31,15 +31,16 @@ const PreviousResults = () => {
 
                         console.log('Retreived results: ',response.data);
                         setUserData(response.data)
-                        setIsPending(false);
                         if(response.data.length===0){
                             setErrMsg('No records found');
-                            console.log(errMsg)
+                            console.log(errMsg);
+                            setIsPending(false);
+                        }else{
+                            setIsPending(false)
                         }
-
                     }
                     getResults();
-                    
+
                     }
                 })
         }
@@ -51,7 +52,9 @@ const PreviousResults = () => {
 
         {isPending && <p>Fetching results</p>}
 
-        {!isPending && errMsg.length ===0 &&
+        {!isPending && errMsg.length!==0 && <p>No records found</p>}
+
+        {!isPending && errMsg.length === 0 &&
         <div className='table-container'>
             <table>
                 <thead>
