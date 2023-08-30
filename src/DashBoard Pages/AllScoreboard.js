@@ -21,14 +21,14 @@ const AllScoreboard = () => {
     useEffect(()=>{
 
         if(localStorage.getItem('token')!==''){
-            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log(res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
                     navigate('/');
                 }else{
                     setUser(res.data);
-                    axios.get('http://localhost:9092/getscoreboard').then(res=>{
+                    axios.get('https://techie-webapp-api.onrender.com/getscoreboard').then(res=>{
                         console.log('Response from scoreboard: ',res.data);
                         setUsersScoreboard(res.data);
                         if(res.data.length===0){
@@ -50,7 +50,7 @@ const AllScoreboard = () => {
         const getUsersScores = async() =>{
             // console.log('Type: ',type)
             console.log('Sort Name: ',sortName)
-            const response = await axios.post('http://localhost:9092/sortname',{isAsc: sortName});
+            const response = await axios.post('https://techie-webapp-api.onrender.com/sortname',{isAsc: sortName});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
         }
@@ -64,7 +64,7 @@ const AllScoreboard = () => {
         const getUsersScores = async() =>{
             // console.log('Type: ',type)
             console.log('Sort Email: ',sortEmail)
-            const response = await axios.post('http://localhost:9092/sortemail',{isAsc: sortEmail});
+            const response = await axios.post('https://techie-webapp-api.onrender.com/sortemail',{isAsc: sortEmail});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
         }
@@ -79,7 +79,7 @@ const AllScoreboard = () => {
         const getUsersScores = async() =>{
             // console.log('Type: ',type)
             console.log('Sort Score: ',sortScore)
-            const response = await axios.post('http://localhost:9092/sortscore',{isAsc: sortScore});
+            const response = await axios.post('https://techie-webapp-api.onrender.com/sortscore',{isAsc: sortScore});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
         }
@@ -94,7 +94,7 @@ const AllScoreboard = () => {
         const getUsersScores = async() =>{
             // console.log('Type: ',type)
             console.log('Sort Category: ',sortCategory)
-            const response = await axios.post('http://localhost:9092/sortcategory',{isAsc: sortCategory});
+            const response = await axios.post('https://techie-webapp-api.onrender.com/sortcategory',{isAsc: sortCategory});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
         }
@@ -109,7 +109,7 @@ const AllScoreboard = () => {
         const getUsersScores = async() =>{
             // console.log('Type: ',type)
             console.log('Sort Date: ',sortCategory)
-            const response = await axios.post('http://localhost:9092/sortdate',{isAsc: sortDate});
+            const response = await axios.post('https://techie-webapp-api.onrender.com/sortdate',{isAsc: sortDate});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
         }
