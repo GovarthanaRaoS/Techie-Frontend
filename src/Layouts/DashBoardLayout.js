@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { useNavigate,Outlet, NavLink, Link } from 'react-router-dom';
 import { Route } from "react-router-dom";
 import DashboardHome from '../DashBoard Pages/DashboardHome';
@@ -52,6 +52,40 @@ const DashBoardLayout = () => {
     const menuIcon = document.getElementsByClassName("icon-menu");
     const subMenuContainer = document.getElementById('sub-menu-container');
     const spanTags = document.getElementsByTagName("span");
+    let menuRef = useRef();
+    let iconRef = useRef();
+
+    useEffect(()=>{
+
+        // const iconHandle = (e) =>{
+        //     if(!iconRef.current.contains(e.target)){
+        //         console.log('Icon clicked: ',iconRef)
+        //     }
+        // }
+
+        // document.addEventListener('mousedown',iconHandle);
+
+        // return ()=>{
+        //     document.removeEventListener('mousedown',iconHandle);
+        // }
+        
+
+        const handler = (e) =>{
+            if(!iconRef.current.contains(e.target)){
+                console.log('Icon not clicked');
+                if(!menuRef.current.contains(e.target)){
+                    console.log('Clicked outside')
+                    setIsChecked(false);
+                }
+            }
+        }
+        document.addEventListener('mousedown',handler);
+
+        return ()=>{
+
+            document.removeEventListener('mousedown',handler);
+        }
+    })
 
     useEffect(()=>{
         console.log("Is Checked: ",isChecked);
@@ -92,8 +126,9 @@ const DashBoardLayout = () => {
         <header className='dash-header-container'>
             <h2 className='title-logo'><Link to='/'>Techie</Link></h2>
             <div className="user-options">
-                <input type="checkbox" id='checkDash' value={isChecked} checked={isChecked} onChange={handleChecked}/><label htmlFor='checkDash' className='icon-menu'>=</label>
-                <div id='sub-menu-container' className={isGotoClicked?'sub-menu1-goto':"sub-menu1"}>
+                {/* <input type="checkbox" id='checkDash' value={isChecked} checked={isChecked} onChange={handleChecked}/><label htmlFor='checkDash' className='icon-menu' ref={iconRef}>=</label> */}
+                <input type="checkbox" id='checkDash' value={isChecked} checked={isChecked} onChange={handleChecked}/><label htmlFor='checkDash' className='icon-menu' ref={iconRef}>=</label>
+                <div id='sub-menu-container' className={isGotoClicked?'sub-menu1-goto':"sub-menu1"} ref={menuRef}>
                     <ul>
                         <li><Link onClick={setFalseOnClick} to='/dashboard2/updateprofile'><span>Update Profile</span></Link></li>
                         <li className='got-cont'>
