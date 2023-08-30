@@ -1,0 +1,34 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.active{
+  background-color: aliceblue;
+  color: #303030 !important;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.not-found-container{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-container{
+  padding: 15px 25px;
+  background-color: #303030;
+  color: aliceblue;
+  border-radius: 15px;
+}
+.error-container h3{
+  margin-block: 20px;
+}
+.error-container p{
+  margin-block: 15px;
+}
+.error-container a{
+  background-color: aliceblue;
+  color: #303030;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
