@@ -236,7 +236,7 @@ const UpdatePage = () => {
 
   return (
     <div className='update-container'>
-        {isPending && <p>Loading data</p>}
+        {isPending && <p className='no-records'>Loading data</p>}
         {!isPending && <form onSubmit={handleSubmit}>
             {/* <fieldset> */}
                 <legend>Update Details</legend>
