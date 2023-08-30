@@ -17,6 +17,8 @@ const AllScoreboard = () => {
     const [sortDate, setSortDate] = useState(true);
     const [isChanged, setIsChanged] = useState(false);
     const [sortedUsers, setSortedUsers] = useState([]);
+    const [width, setInnerWidth] = useState(window.innerWidth);
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(()=>{
 
@@ -43,7 +45,15 @@ const AllScoreboard = () => {
         }
     },[])
 
+    useEffect(()=>{
+        window.addEventListener('resize',function(){
+            setInnerWidth(window.innerWidth);
+            console.log("Innerwidth: ",width)
+        })
+    },[])
+
     const handleSortName = () =>{
+        setIsFetching(true);
         setIsChanged(true);
         setSortName(prev=>!prev);
         // console.log(sortName);
@@ -53,11 +63,12 @@ const AllScoreboard = () => {
             const response = await axios.post('https://techie-webapp-api.onrender.com/sortname',{isAsc: sortName});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
+            setIsFetching(false);
         }
         getUsersScores();
     }
     const handleSortEmail = () =>{
-
+        setIsFetching(true);
         setIsChanged(true);
         setSortEmail(prev=>!prev);
         // console.log(sortName);
@@ -67,12 +78,13 @@ const AllScoreboard = () => {
             const response = await axios.post('https://techie-webapp-api.onrender.com/sortemail',{isAsc: sortEmail});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
+            setIsFetching(false);
         }
         getUsersScores();
 
     }
     const handleSortScore = () =>{
-
+        setIsFetching(true);
         setIsChanged(true);
         setSortScore(prev=>!prev);
         // console.log(sortName);
@@ -82,12 +94,13 @@ const AllScoreboard = () => {
             const response = await axios.post('https://techie-webapp-api.onrender.com/sortscore',{isAsc: sortScore});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
+            setIsFetching(false);
         }
         getUsersScores();
 
     }
     const handleSortCategory = () =>{
-
+        setIsFetching(true);
         setIsChanged(true);
         setSortCategory(prev=>!prev);
         // console.log(sortName);
@@ -97,12 +110,13 @@ const AllScoreboard = () => {
             const response = await axios.post('https://techie-webapp-api.onrender.com/sortcategory',{isAsc: sortCategory});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
+            setIsFetching(false);
         }
         getUsersScores();
 
     }
     const handleSortDate = () =>{
-
+        setIsFetching(true);
         setIsChanged(true);
         setSortDate(prev=>!prev);
         // console.log(sortName);
@@ -112,6 +126,7 @@ const AllScoreboard = () => {
             const response = await axios.post('https://techie-webapp-api.onrender.com/sortdate',{isAsc: sortDate});
             console.log('Response from server: ',response.data);
             setSortedUsers(response.data);
+            setIsFetching(false);
         }
         getUsersScores();
     }
@@ -139,47 +154,50 @@ const AllScoreboard = () => {
                         return(
                             <tr key={usr.id}>
                                 <td></td>
-                                <td>{usr.name}</td>
-                                <td>{usr.email}</td>
-                                <td>{usr.score}</td>
-                                <td>{usr.category}</td>
-                                <td>{usr.date}</td>
+                                <td data-cell="name">{usr.name}</td>
+                                <td data-cell="email">{usr.email}</td>
+                                <td data-cell="score">{usr.score}</td>
+                                <td data-cell="category">{usr.category}</td>
+                                <td data-cell="date">{usr.date.toString().substring(0,10)}</td>
                             </tr>
                         )
                     })
                     :
-                    sortedUsers.map(usr=>{
+                    (
+                        !isFetching?(sortedUsers.map(usr=>{
                         return(
                             <tr key={usr.id}>
                                 <td></td>
-                                <td>{usr.name}</td>
-                                <td>{usr.email}</td>
-                                <td>{usr.score}</td>
-                                <td>{usr.category}</td>
-                                <td className='date-td'>{usr.date.toString().substring(0,10)}</td>
+                                <td data-cell="name">{usr.name}</td>
+                                <td data-cell="email">{usr.email}</td>
+                                <td data-cell="score">{usr.score}</td>
+                                <td data-cell="category">{usr.category}</td>
+                                <td data-cell="date" className='date-td'>{usr.date.toString().substring(0,10)}</td>
                             </tr>
                         )
-                    })
+                    })):
+                    <p className='loading-message'>Fetching users...</p>
+                    )
                     }
                 </tbody>
             </table>
-            {/* <div className="sort-buttons-container"> */}
+            {width<710 && <div className="sort-buttons-container">
                 {/* <div className="sort-name"> */}
-                    {/* <button onClick={()=>handleSortName()} className='sortButt'>Sort by Name</button> */}
-                {/* </div>
-                <div className="sort-email"> */}
-                    {/* <button onClick={()=>handleSortEmail('email')} className='sortButt'>Sort by Email</button> */}
-                {/* </div>
-                <div className="sort-score"> */}
-                    {/* <button onClick={handleSortScore} className='sortButt'>Sort by Score</button> */}
-                {/* </div>
-                <div className="sort-category"> */}
-                    {/* <button onClick={handleSortCategory} className='sortButt'>Sort by Category</button> */}
-                {/* </div>
-                <div className="sort-date"> */}
-                    {/* <button onClick={handleSortDate} className='sortButt'>Sort by Date</button> */}
+                    <button onClick={handleSortName} className='sortButt'>Sort by Name</button>
                 {/* </div> */}
-            {/* </div> */}
+                {/* <div className="sort-email"> */}
+                    <button onClick={handleSortEmail} className='sortButt'>Sort by Email</button>
+                {/* </div> */}
+                    {/* <div className="sort-score"> */}
+                    <button onClick={handleSortScore} className='sortButt'>Sort by Score</button>
+                {/* </div> */}
+                    {/* <div className="sort-category"> */}
+                    <button onClick={handleSortCategory} className='sortButt'>Sort by Category</button>
+                {/* </div> */}
+                {/* <div className="sort-date"> */}
+                    <button onClick={handleSortDate} className='sortButt'>Sort by Date</button>
+                {/* </div> */}
+            </div>}
         </div>
         }
     </div>

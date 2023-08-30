@@ -48,10 +48,6 @@ const DashBoardLayout = () => {
 
     }
 
-    const checkbox = document.getElementById('checkDash');
-    const menuIcon = document.getElementsByClassName("icon-menu");
-    const subMenuContainer = document.getElementById('sub-menu-container');
-    const spanTags = document.getElementsByTagName("span");
     let menuRef = useRef();
     let iconRef = useRef();
 

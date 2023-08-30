@@ -128,7 +128,7 @@ const ManageUserAccount = () => {
         {(isPending || isFetching) && <p className='no-records'>Loading users</p>}
         {!isPending && !isFetching && <div className="manage-user-account-subcontainer">
             {(user.length !== 0 ||  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
-                <h3>User details</h3>
+                <h3 className='mana-title'>User details</h3>
                 <table className='responsive-table'>
                     <thead>
                         <tr>
@@ -144,13 +144,13 @@ const ManageUserAccount = () => {
                     <tbody>
                         {filteredUser.map(usr=>{
                             return (
-                                <tr key={usr.id} className='responsive-table-item'>
+                                <tr key={usr.id}>
                                     <td></td>
-                                    <td>{usr.name}</td>
-                                    <td>{usr.email}</td>
-                                    <td>{usr.role}</td>
-                                    <td><button className='deleteButt' onClick={()=>handleDeleteAccount(usr.email, usr.role)}>Delete</button></td>
-                                    {isAdmin && <td key={usr.id}>
+                                    <td data-cell="Name">{usr.name}</td>
+                                    <td data-cell="Email">{usr.email}</td>
+                                    <td data-cell="Role">{usr.role}</td>
+                                    <td data-cell="Action"><button className='deleteButt' onClick={()=>handleDeleteAccount(usr.email, usr.role)}>Delete</button></td>
+                                    {isAdmin && <td data-cell="Change role" key={usr.id}>
                                                     <select value={changedRole[usr.id]} onChange={(e)=>handleRoleChange(setChangedRole(e.target.value),usr.id)}>
                                                         <option value=''>Role</option>
                                                         <option value='guest'>Guest</option>
@@ -158,7 +158,7 @@ const ManageUserAccount = () => {
                                                         <option value='admin'>Admin</option>
                                                     </select>
                                                 </td>}
-                                    {isAdmin&& <td><button className='deleteButt' disabled={usr.role==='admin' || usr.role===changedRole} onClick={()=>handleSaveUser(usr.email)}>Save user</button></td>}
+                                    {isAdmin&& <td data-cell="Save user"><button className='deleteButt' disabled={usr.role==='admin' || usr.role===changedRole} onClick={()=>handleSaveUser(usr.email)}>Save user</button></td>}
                                 </tr>
                             )
                         })}

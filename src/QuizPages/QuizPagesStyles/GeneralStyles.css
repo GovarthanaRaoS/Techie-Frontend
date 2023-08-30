@@ -136,7 +136,7 @@
     background-color: #303030;
     color: aliceblue;
 }
-.previous-results-container .table-container th,td{
+.previous-results-container .table-container th, .previous-results-container .table-container td{
     border: 0.5px solid black;
 }
 .previous-results-container .table-container td, .table-container th{
@@ -153,7 +153,8 @@
 }
 .loading-message{
     text-align: center;
-    padding: 0px 20px;
+    width: 200px;
+    padding: 10px 20px;
     background-color: #303030;
     color: aliceblue;
     border-radius: 10px;
@@ -164,7 +165,7 @@
     background-color: #303030;
     color: aliceblue;
     padding: 15px 25px;
-    width: 500px;
+    width: 200px;
     border-radius: 10px;
 }
 
@@ -311,6 +312,15 @@
 
 @media screen and (max-width: 350px) {
     .question-container{
-        width: 280px;
+        width: 270px;
+    }
+    .previous-results-container{
+        padding: 0;
+    }
+    .previous-results-container th{
+        padding-inline: 8px;
+    }
+    .previous-results-container tbody td{
+        padding-inline: 8px;
     }
 }

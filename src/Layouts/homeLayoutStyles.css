@@ -441,4 +441,14 @@ footer{
         outline: none;
         padding: 10px;
     }
+    .previous-results-container{
+        padding: 0;
+    }
+    .cards-container{
+        width: 270px;
+        margin-inline: auto;
+    }
+    .previous-results-container tbody td{
+        padding-inline: 8px;
+    }
 }
