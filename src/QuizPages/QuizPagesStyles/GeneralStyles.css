@@ -157,6 +157,7 @@
     background-color: #303030;
     color: aliceblue;
     border-radius: 10px;
+    margin-bottom: 0;
 }
 .no-records{
     text-align: center;
