@@ -14,6 +14,7 @@ const ManageUserAccount = () => {
     const [changedRole, setChangedRole] = useState('');
     const [filteredUser, setFilteredUser] = useState([]);
     const [isPending, setIsPending] = useState(true);
+    const [isFetching, setIsFetching] = useState(true);
     
     useEffect(()=>{
 
@@ -35,6 +36,10 @@ const ManageUserAccount = () => {
                         // setFilteredUsers(response.data.filter(uss=>uss.email!==currentUser.email));
                         console.log('Current User Email: ',currentUser.email);
                         setFilteredUser(prev=>response.data.filter(uss=>uss.email!==res.data.email));
+                        if(response.data){
+                            console.log('Response getting users in ManageUserAccount: ',response.data);
+                            setIsFetching(false);
+                        }
                     }
                     getUsers();
             
@@ -120,8 +125,8 @@ const ManageUserAccount = () => {
 
   return (
     <div className='manage-user-account-container'>
-        {isPending && <p>Loading users</p>}
-        {!isPending && <div className="manage-user-account-subcontainer">
+        {isPending && isFetching && <p>Loading users</p>}
+        {!isPending && !isFetching && <div className="manage-user-account-subcontainer">
             {(user.length !== 0 ||  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
                 <h3>User details</h3>
                 <table className='responsive-table'>
@@ -161,7 +166,7 @@ const ManageUserAccount = () => {
                 </table>
             </div>}
         </div>}
-        {!isPending && user.length === 1 && user[0].email === currentUser.email && <p className='no-records'>No User found</p>}
+        {!isPending && !isFetching && user.length === 1 && user[0].email === currentUser.email && <p className='no-records'>No User found</p>}
     </div>
   )
 }
