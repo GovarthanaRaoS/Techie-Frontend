@@ -19,12 +19,23 @@ const HomeLayout = (props) => {
         const token = localStorage.getItem('token');
         // setToken(localStorage.getItem('token'));
         console.log("Token exists in Homepage: ",token);
+        axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+                console.log(res.data);
+                if(res.data ==='Token invalid'){
+                    localStorage.removeItem('token');
+                    navigate('/');
+                }else{
+                    navigate('/dashboard2');
+                    // setIsLogged(true);
+                    // setUser(res.data);
+                }
+            })
         // console.log(isLogged);
-        if(token){
-            navigate('/dashboard2');
-        }else{
-            console.log('Token in HP: ',token);
-        }
+        // if(token){
+        //     navigate('/dashboard2');
+        // }else{
+        //     console.log('Token in HP: ',token);
+        // }
     },[refresh]);
 
   return (
