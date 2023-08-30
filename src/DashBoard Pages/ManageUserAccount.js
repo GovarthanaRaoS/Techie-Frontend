@@ -33,7 +33,7 @@ const ManageUserAccount = () => {
                         console.log("Response from Manage user: ",response.data);
                         setUser(response.data);
                         // setFilteredUsers(response.data.filter(uss=>uss.email!==currentUser.email));
-                        console.log(currentUser.email);
+                        console.log('Current User Email: ',currentUser.email);
                         setFilteredUser(prev=>response.data.filter(uss=>uss.email!==res.data.email));
                     }
                     getUsers();
@@ -123,7 +123,7 @@ const ManageUserAccount = () => {
         {isPending && <p>Loading users</p>}
         {!isPending && <div className="manage-user-account-subcontainer">
             {(user.length === 0 || (user.length === 1 && user[0].email === currentUser.email)) && <p className='no-records'>No User found</p>}
-            {(user.length !== 0 &&  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
+            {(user.length !== 0 ||  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
                 <h3>User details</h3>
                 <table className='responsive-table'>
                     <thead>
