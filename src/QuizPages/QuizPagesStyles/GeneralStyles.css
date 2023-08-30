@@ -151,6 +151,13 @@
     background-color: rgb(187, 206, 223);
     color: #303030;
 }
+.loading-message{
+    text-align: center;
+    padding: 15px 20px;
+    background-color: #303030;
+    color: aliceblue;
+    border-radius: 10px;
+}
 .no-records{
     text-align: center;
     background-color: #303030;
