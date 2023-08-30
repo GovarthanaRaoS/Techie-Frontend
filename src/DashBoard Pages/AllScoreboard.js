@@ -119,7 +119,7 @@ const AllScoreboard = () => {
   return (
     <div className='scoreboard-container'>
         {isPending && <p>Loading users</p>}
-        {!isPending && noRecords.length !== 0 && <p className='no-records-container'>No records found</p>}
+        {!isPending && noRecords.length !== 0 && <p className='no-records'>No records found</p>}
         {!isPending && noRecords.length === 0 && <p className='table-description'>Click on <span className='bold'>column name</span> to sort in ascending or descending order</p>}
         {!isPending && noRecords.length === 0 && 
         <div className='user-scoreboard-container'>
