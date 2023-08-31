@@ -388,6 +388,7 @@
 }
 .scoreboard-table-container tbody tr td{
     padding: 10px 20px;
+    border: none;
 }
 /* .scoreboard-table-container tbody tr td:nth-child(5){
     white-space: nowrap;
