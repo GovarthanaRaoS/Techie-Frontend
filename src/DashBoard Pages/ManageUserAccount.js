@@ -84,7 +84,7 @@ const ManageUserAccount = () => {
         //     return;
         // }
         else if((role==='moderator' || role==='admin') && currentUser.role==='admin'){
-            if(window.confirm("Are you sure you want to delete the moderator's account?")){
+            if(window.confirm(`Are you sure you want to delete the ${role}'s account?`)){
                 axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                     console.log('Delete message: ',res.data);
                     navigate('/dashboard2/manageusers');
