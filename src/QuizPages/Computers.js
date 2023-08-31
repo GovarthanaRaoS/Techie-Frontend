@@ -57,11 +57,11 @@ const Computers = () => {
   const handleNext = () =>{
       setCurrentQuestion(currentQuestion+1);
       console.log('next: ',currentQuestion+1);
+    setAns('');
   }
 
   const [ans, setAns] = useState('');
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-  setAns('');
 
   const handlePrevious = () =>{
       setCurrentQuestion(currentQuestion-1);
