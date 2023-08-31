@@ -19,7 +19,7 @@ const ManageUserAccount = () => {
 
         if(localStorage.getItem('token')!==''){
             
-            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log("Response from useEffect for Manage users: ",res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
@@ -31,7 +31,7 @@ const ManageUserAccount = () => {
                     setIsModerator(res.data.role==='moderator');
 
                         const getUsers = async() =>{
-                            const response = await axios.get('http://localhost:9092/getusers');
+                            const response = await axios.get('https://techie-webapp-api.onrender.com/getusers');
                             console.log("Response from Manage user: ",response.data);
                             if(response.data){
                                 setUser(response.data);
@@ -69,7 +69,7 @@ const ManageUserAccount = () => {
         // }
         if((role==='moderator' || role==='admin') && currentUser.email === email){
             if(window.confirm("Are you sure you want to delete your account?")){
-                axios.delete(`http://localhost:9092/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                     console.log('Delete message: ',res.data);
                     localStorage.removeItem('token');
                     navigate('/');
@@ -85,14 +85,14 @@ const ManageUserAccount = () => {
         // }
         else if((role==='moderator' || role==='admin') && currentUser.role==='admin'){
             if(window.confirm("Are you sure you want to delete the moderator's account?")){
-                axios.delete(`http://localhost:9092/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                     console.log('Delete message: ',res.data);
                     navigate('/dashboard2/manageusers');
                 });
             }
         }
         else if(role==='guest' || role === null){
-            axios.delete(`http://localhost:9092/deleteuser/${email}`).then(res=>{
+            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
                 console.log('Delete message: ',res.data);
                 if(res.data === "Delete successfully"){
                     navigate('/dashboard2/manageusers');
@@ -116,7 +116,7 @@ const ManageUserAccount = () => {
         if(changedRole.length===0){
             return;
         }else{
-            axios.post('http://localhost:9092/updaterole',{email: changingEmail, role: changedRole})
+            axios.post('https://techie-webapp-api.onrender.com/updaterole',{email: changingEmail, role: changedRole})
             .then(res=>{
                 console.log('Update response: ',res.data);
                 if(res.data==='error'){
