@@ -20,7 +20,7 @@ const GeneralKnowledge = () => {
     useEffect(()=>{
 
         if(localStorage.getItem('token')!==''){
-            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log(res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
@@ -134,7 +134,7 @@ const GeneralKnowledge = () => {
                 const jsDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 console.log('Date: ',jsDate);
                 const saveScores = async() =>{
-                    const response = await axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate},{withCredentials: true});
+                    const response = await axios.post("http://localhost:9092/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate},{withCredentials: true});
                     console.log(response.data);
                 }
                 saveScores();

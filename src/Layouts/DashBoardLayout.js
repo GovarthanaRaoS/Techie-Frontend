@@ -18,7 +18,7 @@ const DashBoardLayout = () => {
     useEffect(()=>{
 
         if(localStorage.getItem('token')!==''){
-            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
+            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
                 console.log(res.data);
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
@@ -34,7 +34,7 @@ const DashBoardLayout = () => {
     const handleLogout = () =>{
         const clearSession = async() =>{
             setIsLogged(false);
-            const response = await axios.post("https://techie-webapp-api.onrender.com/logout",{},{withCredentials: true});
+            const response = await axios.post("http://localhost:9092/logout",{},{withCredentials: true});
             console.log("Response for logout: ",response.data);
             localStorage.removeItem('token');
             navigate('/')
@@ -105,7 +105,7 @@ const DashBoardLayout = () => {
             const email = user.email;
             const isModerator = user.role==='moderator'?true:false;
             const isAdmin = user.role==='admin'?true:false;
-            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+            axios.delete(`http://localhost:9092/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                 console.log('Delete message: ',res.data);
                 if(res.data==='Delete successfully'){
                     localStorage.removeItem('token');
