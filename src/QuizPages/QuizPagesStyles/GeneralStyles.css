@@ -197,6 +197,7 @@
     padding-left: 10px;
     padding-block: 6px;
     width: 225px;
+    margin-right: 40px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 10px;
@@ -295,6 +296,7 @@
     .update-container input[type=text], .update-container input[type=email], select{
         width: 100%;
         text-align: center;
+        margin-right: 0;
     }
     .name-container, .email-container ,.phoneno-container, .highgrad-container, .college-container, .company-container, .profession-container{
         text-align: center;
