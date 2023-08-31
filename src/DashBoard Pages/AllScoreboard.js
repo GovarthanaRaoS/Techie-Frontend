@@ -135,8 +135,9 @@ const AllScoreboard = () => {
     <div className='scoreboard-container'>
         {isPending && <p className='no-records'>Loading users</p>}
         {!isPending && noRecords.length !== 0 && <p className='no-records'>No records found</p>}
-        {!isPending && noRecords.length === 0 && <p className='table-description'>Click on <span className='bold'>column name</span> to sort in ascending or descending order</p>}
-        {!isPending && noRecords.length === 0 && 
+        {!isPending && isFetching && <p className='loading-message'>Fetching users</p>}
+        {!isPending && !isFetching && noRecords.length === 0 && <p className='table-description'>Click on <span className='bold'>column name</span> to sort in ascending or descending order</p>}
+        {!isPending && noRecords.length === 0 && !isFetching &&
         <div className='user-scoreboard-container'>
             <table className='scoreboard-table-container'>
                 <thead>
@@ -163,8 +164,7 @@ const AllScoreboard = () => {
                         )
                     })
                     :
-                    (
-                        !isFetching?(sortedUsers.map(usr=>{
+                    sortedUsers.map(usr=>{
                         return(
                             <tr key={usr.id}>
                                 <td></td>
@@ -175,9 +175,7 @@ const AllScoreboard = () => {
                                 <td data-cell="date" className='date-td'>{usr.date.toString().substring(0,10)}</td>
                             </tr>
                         )
-                    })):
-                    <p className='loading-message'>Fetching users...</p>
-                    )
+                    })
                     }
                 </tbody>
             </table>

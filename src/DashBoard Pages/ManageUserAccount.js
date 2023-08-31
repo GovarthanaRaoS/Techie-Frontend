@@ -127,7 +127,7 @@ const ManageUserAccount = () => {
     <div className='manage-user-account-container'>
         {(isPending || isFetching) && <p className='no-records'>Loading users</p>}
         {!isPending && !isFetching && <div className="manage-user-account-subcontainer">
-            {(user.length !== 0 ||  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
+            {(user.length !== 0 &&  (user.length === 1 && user[0].email !== currentUser.email)) && <div className="table-containers">
                 <h3 className='mana-title'>User details</h3>
                 <table className='responsive-table'>
                     <thead>
@@ -149,7 +149,7 @@ const ManageUserAccount = () => {
                                     <td data-cell="Name">{usr.name}</td>
                                     <td data-cell="Email">{usr.email}</td>
                                     <td data-cell="Role">{usr.role}</td>
-                                    <td data-cell="Action"><button className='deleteButt' onClick={()=>handleDeleteAccount(usr.email, usr.role)}>Delete</button></td>
+                                    <td data-cell="Action"><button className='deleteButtRed' onClick={()=>handleDeleteAccount(usr.email, usr.role)}>Delete</button></td>
                                     {isAdmin && <td data-cell="Change role" key={usr.id}>
                                                     <select value={changedRole[usr.id]} onChange={(e)=>handleRoleChange(setChangedRole(e.target.value),usr.id)}>
                                                         <option value=''>Role</option>

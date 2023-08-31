@@ -39,6 +39,8 @@ const UpdatePage = () => {
     // const [validProfession, setValidProfession] = useState(false);
     const [professionTouched, setProfessionTouched] = useState(false);
 
+    const [role, setRole] = useState('');
+
     const [isPending, setIsPending] = useState(true);
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
@@ -60,6 +62,7 @@ const UpdatePage = () => {
                     setCollege(res.data.college_name === null?'':res.data.college_name);
                     setCompany(res.data.company_name === null?'':res.data.company_name);
                     setProfession(res.data.profession === null?'':res.data.profession);
+                    setRole(res.data.role === null?'':res.data.role);
                     setIsPending(false);
                     // setUser(res.data);
                 }
@@ -184,6 +187,12 @@ const UpdatePage = () => {
 
     }
 
+    const refresh = () =>{
+        setTimeout(()=>{
+            window.location.reload();
+        },3000)
+    }
+
     const handleSubmit = (event) =>{
         setIsSubmitClicked(true);
 
@@ -213,6 +222,7 @@ const UpdatePage = () => {
 
                 }).then(res=>console.log(res));
             console.log('Success');
+            // refresh();
             navigate('/dashboard2')
         }else{
             setNameTouched(true);
@@ -232,6 +242,24 @@ const UpdatePage = () => {
         }
         
         event.preventDefault();
+    }
+
+    const handleAccountDeletion = (event) =>{
+        event.preventDefault();
+        if(window.confirm('Are you sure you want to delete your account?')){
+            // const userEmail = email;
+            const isModerator = role==='moderator'?true:false;
+            const isAdmin = role==='admin'?true:false;
+            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+                console.log('Delete message: ',res.data);
+                if(res.data==='Delete successfully'){
+                    localStorage.removeItem('token');
+                    navigate('/');
+                }else{
+                    console.log('Error while deleting account')
+                }
+            });
+        }
     }
 
   return (
@@ -347,7 +375,8 @@ const UpdatePage = () => {
                     {isEmployee && professionTouched && profession.length<2 && profession.length !== 0 && <small className='err-msg'>Profession field must more than 2 characters</small>}
                 </div>
                 <div className="update-butt-container">
-                    <button className='updateButt'>Update</button>
+                    <button type='submit' className='updateButt'>Update</button>
+                    <button onClick={handleAccountDeletion} className='deleteButtRed'>Delete Account</button>
                 </div>
             {/* </fieldset> */}
         </form>}

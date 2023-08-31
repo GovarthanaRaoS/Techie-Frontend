@@ -426,7 +426,22 @@
 .table-description .bold{
     font-weight: bolder;
 }
-
+.deleteButtRed{
+    background-color: red;
+    padding: 10px 15px;
+    border: 0.3px solid #303030;
+    border-radius: 10px;
+    color: white;
+    margin-inline: 10px;
+}
+.deleteButtRed:hover{
+    background-color: rgb(206, 0, 0);
+}
+@media screen and (max-width: 1150px) {
+    .welcome{
+        text-align: center;
+    }
+}
 @media screen and (max-width:710px) {
     .welcome{
         text-align: center;

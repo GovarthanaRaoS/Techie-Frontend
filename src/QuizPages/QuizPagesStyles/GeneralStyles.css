@@ -210,12 +210,15 @@
 }
 .update-butt-container{
     text-align: center;
+    margin-top: 20px;
 }
 .updateButt{
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 10px;
     border: 0.3px solid #303030;
+    margin-bottom: 15px;
+    margin-inline: 15px;
 }
 .updateButt:hover{
     border: 0.3px solid aliceblue;
