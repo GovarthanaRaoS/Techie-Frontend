@@ -35,12 +35,14 @@ const ManageUserAccount = () => {
                     setIsModerator(res.data.role==='moderator');
 
                         const getUsers = async() =>{
+                            setIsFetching(true);
                             const response = await axios.get('https://techie-webapp-api.onrender.com/getusers');
                             console.log("Response from Manage user: ",response.data);
                             if(response.data[0].message === 'error'){
                                 console.log('Received Error from Database: ',response.data[0].message);
                                 setErrMsg('Cannot connect to database. Please try later or restart the server...');
                                 setIsPending(false);
+                                setIsFetching(false);
                                 return;
                             }
                             if(response.data){
@@ -52,6 +54,7 @@ const ManageUserAccount = () => {
                                 console.log('Response getting users in ManageUserAccount: ',response.data);
                                 console.log('Filtered Users: ',filteredUser)
                                 setIsFetching(false);
+                                setIsPending(false);
                             }
                         }
 
@@ -98,22 +101,27 @@ const ManageUserAccount = () => {
         // }
         else if((role==='moderator' || role==='admin') && currentUser.role==='admin'){
             if(window.confirm(`Are you sure you want to delete the ${role}'s account?`)){
+                setIsFetching(true)
                 axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                     console.log('Delete message: ',res.data);
                     // navigate('/dashboard2/manageusers');
+                    setIsFetching(true);
                     setRefresh(!refresh);
                 });
             }
         }
         else if(role==='guest' || role === null){
             if(window.confirm('Are you sure you want to delete this account?')){
+                setIsFetching(true)
                 axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
                     console.log('Delete message: ',res.data);
                     if(res.data === "Delete successfully"){
                         // navigate('/dashboard2/manageusers');
                         setRefresh(!refresh);
+                    }else{
+                        setIsFetching(false);
                     }
-                });
+                })
             }else{
                 return;
             }
@@ -141,6 +149,7 @@ const ManageUserAccount = () => {
         else{
 
             if(window.confirm(`Are you sure you want to change the role of ${changingName} from ${old_role} to ${changedRole}?`)){
+                setIsFetching(true);
                 axios.post('https://techie-webapp-api.onrender.com/updaterole',{email: changingEmail, role: changedRole})
                 .then(res=>{
                     console.log('Update response: ',res.data);

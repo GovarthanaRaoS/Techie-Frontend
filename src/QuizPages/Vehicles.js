@@ -11,6 +11,8 @@ const Vehicles = () => {
   const [choices, setChoices] = useState([]);
 
   const [isPending, setIsPending] = useState(true);
+  const [serverError, setServerError] = useState(false);
+  const [saveError, setSaveError] = useState(false);
 
   const [user, setUser] = useState({});
 
@@ -27,6 +29,9 @@ const Vehicles = () => {
                 }else{
                     setUser(res.data);
                 }
+            }).catch(err=>{
+                console.log('Server down');
+                setServerError(true);
             })
         }
     },[])
@@ -112,6 +117,7 @@ const Vehicles = () => {
   const [success, setSuccess] = useState('');
   const [isQuizValid, setIsQuizValid] = useState(false);
   const [scr , setScr] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleSubmit = () =>{
       setIsSubmitClicked(true);
@@ -122,20 +128,25 @@ const Vehicles = () => {
               setNotAllAns('');
           },3000)
       }else{
+        setIsFetching(true);
           setSuccess('Thanks for taking the test. Redirecting to scoreboard.');
-          setTimeout(()=>{
-              setIsSubmitClicked(false);
-              setSuccess('');
               setIsQuizValid(true);
               const score = takeScore();
               console.log('Sorted Scoresheet: ',score);
               setScr(score);
               const jsDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
                 console.log('Date: ',jsDate);
-                axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate}).then(res=>console.log(res.data))
+                axios.post("https://techie-webapp-api.onrender.com/savescores",{name: user.name, email: user.email, score: score, category: questions[0].category, date: jsDate}).then(res=>{
+                    setIsSubmitClicked(true);
+                    console.log(res.data);
+                    setIsFetching(false);
+                }).catch(err=>{
+                    setSuccess('');
+                    setSaveError(true);
+                    setIsFetching(false);
+                })
               // console.log('set score: ',score);
               // navigate('/dashboard2/taketest/scoreboard',{state:{score: score, category: questions[0].category}});
-          },3000);
       }
   }
 
@@ -146,8 +157,9 @@ const Vehicles = () => {
   return (
     <div className='question-container'>
       {isPending && <div className='loading'>Loading questions...</div>}
-      {!isPending && !isQuizValid &&
-      <div className='q-cont'>
+      {!isPending && serverError && <p className='loading-message'>Sorry our server is down. Please try later...</p>}
+      {!isPending && !serverError && !isQuizValid &&
+        <div className='q-cont'>
           <h3>Question {currentQuestion+1} of {questions.length}</h3>
           <p className='question'>{questions[currentQuestion].question}</p>
           <ul className='options-list'>
@@ -164,11 +176,14 @@ const Vehicles = () => {
                 <button className={scoreSheet.length===questions.length?'prevButt':'hidden'} onClick={handleSubmit}>Submit</button>
                 <button disabled={currentQuestion+1 >=questions.length ?true:false} className={currentQuestion+1<questions.length?'prevButt':'hidden'} onClick={handleNext}>Next</button>
             </div>
-          {isSubmitClicked && notAllAns.length!==0 && <p className='msg'>{notAllAns}</p>}
-          {isSubmitClicked && success.length!==0 && <p className='msg'>{success}</p>}
+          {/* {isSubmitClicked && notAllAns.length!==0 && <p className='msg'>{notAllAns}</p>} */}
+          {/* {isSubmitClicked && success.length!==0 && <p className='msg'>{success}</p>} */}
       </div>
       }
-      {!isPending && isQuizValid && <div className='scoreboard'>
+      {!isPending && isSubmitClicked && !saveError && isFetching && <p className='loading-message'>Loading scores...</p>}
+      {!isPending && isSubmitClicked && !isFetching && saveError && isQuizValid && <p className='loading-message'>Sorry our server is down. Please retry later...</p>}
+      {!isPending && isSubmitClicked && !isFetching && !saveError && isQuizValid && 
+      <div className='scoreboard'>
           <p>Congratulations, you have scored {scr} in {questions[0].category}</p>
           <p>Click the below button to take test on other topics</p>
           <div><button className='takeTestButt' onClick={handleTakeTest}>Take another Test</button></div>
