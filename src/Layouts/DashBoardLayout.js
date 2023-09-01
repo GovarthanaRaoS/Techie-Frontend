@@ -159,7 +159,7 @@ const DashBoardLayout = () => {
             <Outlet/>
         </main>
         <footer>
-            <p className='copyright-dash'>Copyright &copy;2023</p>
+            <p className='copyright-dash'>Copyright &copy;2023. Designed by Govarthana</p>
         </footer>
     </div>
   )
