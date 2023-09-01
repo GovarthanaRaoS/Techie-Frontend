@@ -50,7 +50,7 @@ const LoginForm = (props) => {
       console.log("login email: ",loginEmail);
       console.log("login password: ",loginPassword);
       try{
-        const response = await axios.post("http://localhost:9092/login",{
+        const response = await axios.post("https://techie-webapp-api.onrender.com/login",{
         email : loginEmail,
         password : loginPassword,
       },{withCredentials: true});

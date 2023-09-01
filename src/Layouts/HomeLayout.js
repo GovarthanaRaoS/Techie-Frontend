@@ -21,7 +21,7 @@ const HomeLayout = (props) => {
             const token = localStorage.getItem('token');
             // setToken(localStorage.getItem('token'));
             console.log("Token exists in Homepage: ",token);
-            axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')})
+            axios.post("https://techie-webapp-api.onrender.com/checktoken",{toki: localStorage.getItem('token')})
             .then(res=>{
                 if(res.status === 404){
                     throw Error('Page not found');
