@@ -299,6 +299,9 @@ footer{
     text-align: justify;
     display: inline-block;
 }
+.inbetween-data{
+    display: block;
+}
 
 
 @media screen and (max-width: 1000px){

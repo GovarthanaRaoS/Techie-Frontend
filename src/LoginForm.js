@@ -13,6 +13,7 @@ const LoginForm = (props) => {
   const [loginEmailTouched, setLoginEmailTouched] = useState(false);
   const [accNot, setAccNot] = useState(false);
   const [token, setToken] = useState(localStorage.getItem('token')||'');
+  const [logging, setLogging] = useState('');
 
   let validEmail = false;
   let validPassword = false;
@@ -43,15 +44,18 @@ const LoginForm = (props) => {
       validPassword = true;
     }
     if(validEmail && validPassword){
+      setLogging('Logging in...')
       console.log("Valid username and password");
       console.log("Sending to db");
       console.log("login email: ",loginEmail);
-      console.log("login password: ",loginPassword)
-      const response = await axios.post("https://techie-webapp-api.onrender.com/login",{
+      console.log("login password: ",loginPassword);
+      try{
+        const response = await axios.post("http://localhost:9092/login",{
         email : loginEmail,
         password : loginPassword,
       },{withCredentials: true});
       console.log("Response from server: ",response.data);
+      setLogging('');
       if(response.data === "Invalid credentials"){
         setInvalidCreds(true);
         setTimeout(()=>{
@@ -78,6 +82,9 @@ const LoginForm = (props) => {
         //   navigate('/dashboard2');
         // },'3000');
       }
+    }catch(error){
+      console.log('No response from server')
+    }
     }else{
       console.log("Invalid credentials input")
     }
@@ -107,6 +114,7 @@ const LoginForm = (props) => {
                     {isLoginClicked && inValidCreds && <small className='error-message'>Invalid credentials</small>}
                     {isLoginClicked && accNot && <small className='error-message'>Account does not exist</small>}
                     {isLoginClicked && success && <small className='success-message'>Login Successful. Redirecting to dashboard</small>}
+                    {logging.length>0 && <small className='inbetween-data'>{logging}</small>}
                     <button className='loginButt'>Login</button>
                 </fieldset>
             </form>

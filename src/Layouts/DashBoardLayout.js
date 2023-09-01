@@ -14,6 +14,8 @@ const DashBoardLayout = () => {
     const [isChecked,setIsChecked] = useState(false);
     const [isGotoClicked, setIsGotoClicked] = useState(false);
     const [user, setUser] = useState({});
+    // const [isPending, setIsPending] = useState(true);
+    // const [serverError, setServerError] = useState(false);
 
     useEffect(()=>{
 
@@ -23,10 +25,15 @@ const DashBoardLayout = () => {
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
                     navigate('/');
+                    // setIsPending(false);
                 }else{
                     setIsLogged(true);
                     setUser(res.data);
+                    // setIsPending(false);
                 }
+            }).catch(err=>{
+                // setServerError(false);
+                console.log('Error in Dashboard Layout: ',err)
             })
         }
     },[])
@@ -147,6 +154,8 @@ const DashBoardLayout = () => {
             </div>
         </header>
         <main>
+            {/* {isPending && <p className='loading-message'>Loading your dashboard. Please wait...</p>} */}
+            {/* {!isPending && <Outlet/>} */}
             <Outlet/>
         </main>
         <footer>

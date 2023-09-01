@@ -19,6 +19,8 @@ const AllScoreboard = () => {
     const [sortedUsers, setSortedUsers] = useState([]);
     const [width, setInnerWidth] = useState(window.innerWidth);
     const [isFetching, setIsFetching] = useState(false);
+    const [serverError, setServerError] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
 
     useEffect(()=>{
 
@@ -28,19 +30,34 @@ const AllScoreboard = () => {
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
                     navigate('/');
+                    setIsPending(false);
                 }else{
                     setUser(res.data);
                     axios.get('https://techie-webapp-api.onrender.com/getscoreboard').then(res=>{
                         console.log('Response from scoreboard: ',res.data);
                         setUsersScoreboard(res.data);
+                        if(res.data[0].message === 'error'){
+                            console.log('Received Error: ',res.data[0].message);
+                            setErrMsg('Cannot connect to database')
+                            setIsPending(false);
+                            return;
+                        }
                         if(res.data.length===0){
+                            setIsPending(false);
                             setNoRecords('No records found')
                         }else{
+                            setIsPending(false);
                             setNoRecords('');
                         }
                         setIsPending(false);
+                    }).catch(errr=>{
+                        setIsPending(false);
+                        setServerError(true);
                     })
                 }
+            }).catch(err=>{
+                setIsPending(false);
+                setServerError(true);
             })
         }
     },[])
@@ -133,11 +150,13 @@ const AllScoreboard = () => {
 
   return (
     <div className='scoreboard-container'>
-        {isPending && <p className='no-records'>Loading users</p>}
-        {!isPending && noRecords.length !== 0 && <p className='no-records'>No records found</p>}
-        {!isPending && isFetching && <p className='loading-message'>Fetching users</p>}
-        {!isPending && !isFetching && noRecords.length === 0 && <p className='table-description'>Click on <span className='bold'>column name</span> to sort in ascending or descending order</p>}
-        {!isPending && noRecords.length === 0 && !isFetching &&
+        {isPending && <p className='loading-message'>Loading users</p>}
+        {!isPending && serverError && <p className='loading-message'>Sorry our server is down. Please try later...</p>}
+        {!isPending && !serverError && errMsg.length!==0 && <p className='loading-message'>Cannot connect to database. Please try later or restart the server...</p>}
+        {!isPending && !serverError && errMsg.length===0  && noRecords.length !== 0 && <p className='no-records'>No records found</p>}
+        {!isPending && !serverError && errMsg.length===0  && isFetching && <p className='loading-message'>Fetching users</p>}
+        {!isPending && !serverError && errMsg.length===0  && !isFetching && noRecords.length === 0 && <p className='table-description'>Click on <span className='bold'>column name</span> to sort in ascending or descending order</p>}
+        {!isPending && !serverError && errMsg.length===0 && noRecords.length === 0 && !isFetching &&
         <div className='user-scoreboard-container'>
             <table className='scoreboard-table-container'>
                 <thead>
@@ -179,7 +198,7 @@ const AllScoreboard = () => {
                     }
                 </tbody>
             </table>
-            {width<710 && <div className="sort-buttons-container">
+            {width<801 && <div className="sort-buttons-container">
                 {/* <div className="sort-name"> */}
                     <button onClick={handleSortName} className='sortButt'>Sort by Name</button>
                 {/* </div> */}

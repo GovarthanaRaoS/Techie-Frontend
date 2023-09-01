@@ -14,6 +14,9 @@ const ManageUserAccount = () => {
     const [filteredUser, setFilteredUser] = useState([]);
     const [isPending, setIsPending] = useState(true);
     const [isFetching, setIsFetching] = useState(true);
+    const [errMsg, setErrMsg] = useState('');
+    const [serverError, setServerError] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     
     useEffect(()=>{
 
@@ -24,6 +27,7 @@ const ManageUserAccount = () => {
                 if(res.data ==='Token invalid'){
                     localStorage.removeItem('token');
                     navigate('/');
+                    setIsPending(false);
                 }else{
                     const currUsr = res.data;
                     setCurrentUser(currUsr);
@@ -33,6 +37,12 @@ const ManageUserAccount = () => {
                         const getUsers = async() =>{
                             const response = await axios.get('https://techie-webapp-api.onrender.com/getusers');
                             console.log("Response from Manage user: ",response.data);
+                            if(response.data[0].message === 'error'){
+                                console.log('Received Error from Database: ',response.data[0].message);
+                                setErrMsg('Cannot connect to database. Please try later or restart the server...');
+                                setIsPending(false);
+                                return;
+                            }
                             if(response.data){
                                 setUser(response.data);
                                 // setFilteredUsers(response.data.filter(uss=>uss.email!==currentUser.email));
@@ -56,9 +66,12 @@ const ManageUserAccount = () => {
                     setIsPending(false);
 
                 }
+            }).catch(err=>{
+                setIsPending(false);
+                setServerError(true);
             })
         }
-    },[])
+    },[refresh]);
 
     const handleDeleteAccount = (email,role) =>{
         console.log(email,role);
@@ -87,17 +100,23 @@ const ManageUserAccount = () => {
             if(window.confirm(`Are you sure you want to delete the ${role}'s account?`)){
                 axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
                     console.log('Delete message: ',res.data);
-                    navigate('/dashboard2/manageusers');
+                    // navigate('/dashboard2/manageusers');
+                    setRefresh(!refresh);
                 });
             }
         }
         else if(role==='guest' || role === null){
-            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
-                console.log('Delete message: ',res.data);
-                if(res.data === "Delete successfully"){
-                    navigate('/dashboard2/manageusers');
-                }
-            });
+            if(window.confirm('Are you sure you want to delete this account?')){
+                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
+                    console.log('Delete message: ',res.data);
+                    if(res.data === "Delete successfully"){
+                        // navigate('/dashboard2/manageusers');
+                        setRefresh(!refresh);
+                    }
+                });
+            }else{
+                return;
+            }
         }
         else{
             return;
@@ -110,28 +129,41 @@ const ManageUserAccount = () => {
         console.log('role: ',changedRole)
     }
 
-    const handleSaveUser = (changingEmail) =>{
+    const handleSaveUser = (changingEmail, changingName, old_role) =>{
         console.log('Changing Email: ',changingEmail);
         console.log('Chosen role',changedRole);
         if(changedRole.length===0){
+            window.alert('Please choose a role');
             return;
-        }else{
-            axios.post('https://techie-webapp-api.onrender.com/updaterole',{email: changingEmail, role: changedRole})
-            .then(res=>{
-                console.log('Update response: ',res.data);
-                if(res.data==='error'){
-                    console.log('Something went wrong while updating the user role');
-                }else{
-                    navigate('/dashboard2/manageusers')
-                }
-            })
+        }else if(old_role === changedRole){
+            window.alert('User already has the same access level')
+        }
+        else{
+
+            if(window.confirm(`Are you sure you want to change the role of ${changingName} from ${old_role} to ${changedRole}?`)){
+                axios.post('https://techie-webapp-api.onrender.com/updaterole',{email: changingEmail, role: changedRole})
+                .then(res=>{
+                    console.log('Update response: ',res.data);
+                    if(res.data==='error'){
+                        console.log('Something went wrong while updating the user role');
+                    }else{
+                        // navigate('/dashboard2/manageusers')
+                        setRefresh(!refresh);
+                    }
+                })
+            }else{
+                return;
+            }
+
         }
     }
 
   return (
     <div className='manage-user-account-container'>
-        {(isPending || isFetching) && <p className='no-records'>Loading users</p>}
-        {!isPending && !isFetching && <div className="manage-user-account-subcontainer">
+        {(isPending || isFetching) && !serverError && <p className='no-records'>Loading users</p>}
+        {!isPending && serverError && <p className='loading-message'>Sorry our server is down. Please try later...</p>}
+        {!isPending && !serverError && errMsg.length>0 && <p className='loading-message'>Cannot connect to database. Please try later or restart your server...</p>}
+        {!isPending && !serverError && errMsg.length===0 && !isFetching && <div className="manage-user-account-subcontainer">
             {filteredUser.length !== 0 &&  <div className="table-containers">
                 <h3 className='mana-title'>User details</h3>
                 <table className='responsive-table'>
@@ -163,7 +195,7 @@ const ManageUserAccount = () => {
                                                         <option value='admin'>Admin</option>
                                                     </select>
                                                 </td>}
-                                    {isAdmin&& <td data-cell="Save user"><button className='deleteButt' disabled={usr.role==='admin' || usr.role===changedRole} onClick={()=>handleSaveUser(usr.email)}>Save user</button></td>}
+                                    {isAdmin&& <td data-cell="Save user"><button className='deleteButt' onClick={()=>handleSaveUser(usr.email, usr.name, usr.role)}>Save user</button></td>}
                                 </tr>
                             )
                         })}
@@ -171,7 +203,7 @@ const ManageUserAccount = () => {
                 </table>
             </div>}
         </div>}
-        {!isPending && !isFetching && filteredUser.length===0 && <p className='no-records'>No User found</p>}
+        {!isPending && !serverError && errMsg.length===0 && !isFetching && filteredUser.length===0 && <p className='no-records'>No User found</p>}
     </div>
   )
 }

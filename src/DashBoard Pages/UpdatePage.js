@@ -42,7 +42,11 @@ const UpdatePage = () => {
     const [role, setRole] = useState('');
 
     const [isPending, setIsPending] = useState(true);
+    const [serverError, setServerError] = useState(false);
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+    const [updating, setUpdating] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [refresh, setRefresh] = useState(false);
 
     const navigate = useNavigate();
 
@@ -55,71 +59,33 @@ const UpdatePage = () => {
                     localStorage.removeItem('token');
                     navigate('/');
                 }else{
-                    setName(res.data.name);
-                    setEmail(res.data.email);
-                    setPhone(res.data.phoneno === null?'':res.data.phoneno);
-                    setHighGrad(res.data.highest_grad === null?'':res.data.highest_grad);
-                    setCollege(res.data.college_name === null?'':res.data.college_name);
-                    setCompany(res.data.company_name === null?'':res.data.company_name);
-                    setProfession(res.data.profession === null?'':res.data.profession);
-                    setRole(res.data.role === null?'':res.data.role);
-                    setIsPending(false);
+                    axios.post('https://techie-webapp-api.onrender.com/getuserdata',{email: res.data.email}).then(response=>{
+                        if(response.data[0].message === 'error'){
+                            console.log('Error while fetching data from database');
+                            setErrMsg('Cannot connect to database. Please try later or restart the server...');
+                            setIsPending(false);
+                            return;
+                        }else{
+                            console.log(response.data);
+                            setName(response.data[0].name);
+                            setEmail(response.data[0].email);
+                            setPhone(response.data[0].phoneno === null?'':response.data[0].phoneno);
+                            setHighGrad(response.data[0].highest_grad === null?'':response.data[0].highest_grad);
+                            setCollege(response.data[0].college_name === null?'':response.data[0].college_name);
+                            setCompany(response.data[0].company_name === null?'':response.data[0].company_name);
+                            setProfession(response.data[0].profession === null?'':response.data[0].profession);
+                            setRole(response.data[0].role === null?'':response.data[0].role);
+                            setIsPending(false);
+                        }
+                    })
                     // setUser(res.data);
                 }
+            }).catch(err=>{
+                setIsPending(false);
+                setServerError(true);
             })
         }
-    },[])
-
-    // function validateFields(){
-    //     if(name.length>3 && name.length<=23 && nameRegex.test(name)){
-    //         setValidName(true);
-    //     }else{
-    //         setValidName(false);
-    //     }
-    //     if(phone.length === 10 && phoneRegex.test(phone)){
-    //         setValidPhone(true);
-    //     }else{
-    //         setValidPhone(false);
-    //     }
-    //     if(isCollGrad){
-    //         if(highgrad !== ''){
-    //             setValidHighgrad(true);
-    //         }else{
-    //             setValidHighgrad(false);
-    //         }
-    //         if(college.length>=10){
-    //             setValidCollege(true);
-    //         }else{
-    //             setValidCollege(false);
-    //         }
-    //     }else{
-    //         setValidCollege(true);
-    //         setValidHighgrad(true);
-    //     }
-    //     if(isEmployee){
-    //         if(company.length>=5){
-    //             setValidCompany(true);
-    //         }else{
-    //             setValidCompany(false);
-    //         }
-    //         if(profession.length>=2){
-    //             setValidProfession(true);
-    //         }else{
-    //             setValidProfession(false);
-    //         }
-    //     }else{
-    //         setValidProfession(true);
-    //         setValidCompany(true);;
-    //     }
-
-    //     if(validCollege && validCompany && validHighgrad && validName && validPhone && validProfession){
-    //         return true;
-    //     }else{
-    //         return false;
-    //     }
-
-    // }
-
+    },[refresh])
 
     let validName = false;
     let validPhone = false;
@@ -187,12 +153,6 @@ const UpdatePage = () => {
 
     }
 
-    const refresh = () =>{
-        setTimeout(()=>{
-            window.location.reload();
-        },3000)
-    }
-
     const handleSubmit = (event) =>{
         setIsSubmitClicked(true);
 
@@ -210,20 +170,21 @@ const UpdatePage = () => {
         console.log('prof',profession)
 
         if(validateFields()){
-            
+            setUpdating('Updating data...');
             axios.post('https://techie-webapp-api.onrender.com/updateuser',{
                     name:name,
                     email: email,
                     phoneno: phone,
-                    highest_grad: isCollGrad ? highgrad : '',
-                    college_name: isCollGrad ? college : '',
-                    profession: isEmployee ? profession : '',
-                    company_name: isEmployee ? company : ''
-
-                }).then(res=>console.log(res));
-            console.log('Success');
-            // refresh();
-            navigate('/dashboard2')
+                    highest_grad: highgrad,
+                    college_name: college,
+                    profession: profession,
+                    company_name: company
+                }).then(res=>{
+                    console.log(res);
+                    console.log('Success');
+                    setRefresh(true);
+                    // navigate('/dashboard2');
+                });
         }else{
             setNameTouched(true);
             setPhoneTouched(true);
@@ -265,7 +226,8 @@ const UpdatePage = () => {
   return (
     <div className='update-container'>
         {isPending && <p className='loading-message'>Loading data</p>}
-        {!isPending && <form onSubmit={handleSubmit}>
+        {!isPending && serverError && <p className='loading-message'>Sorry our server is down. Please try later...</p>}
+        {!isPending && !serverError && <form onSubmit={handleSubmit}>
             {/* <fieldset> */}
                 <legend>Update Details</legend>
                 <div className="name-container">

@@ -10,6 +10,7 @@ const PreviousResults = () => {
     const [errMsg, setErrMsg] = useState('');
     const navigate = useNavigate();
     const [isPending, setIsPending] = useState(true);
+    const [serverError, setServerError] = useState(false);
 
     useEffect(()=>{
 
@@ -20,7 +21,6 @@ const PreviousResults = () => {
                     localStorage.removeItem('token');
                     navigate('/');
                 }else{
-                    setUser(res.data);
                     // if(res.data.message){
                     //     setErrMsg('No records found');
                     //     return;
@@ -52,9 +52,11 @@ const PreviousResults = () => {
 
         {isPending && <p className='no-records'>Fetching results</p>}
 
-        {!isPending && userData.length ===0 && <p className='no-records'>No records found</p>}
+        {!isPending && serverError && <p className='loading-message'>Sorry our server is down. Please try later...</p>}
 
-        {!isPending && userData.length !== 0 &&
+        {!isPending && !serverError && userData.length ===0 && <p className='no-records'>No records found</p>}
+
+        {!isPending && !serverError && userData.length !== 0 &&
         <div className='table-container'>
             <table>
                 <thead>

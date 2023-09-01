@@ -40,6 +40,8 @@ const SignupForm = (props) => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [isInvalid, setIsInvalid] = useState(false);
 
+    const [saving, setSaving] = useState('');
+
     useEffect(()=>{
         userRef.current.focus();
     },[])
@@ -115,13 +117,15 @@ const SignupForm = (props) => {
       console.log('SecretKey: ',secretKey);
       console.log('IsAdmin: ',isAdmin);
       if(validName&& validUserEmail&& validPwd&& validMatch && isValidRole && roleValdiation){
-        const response = await axios.post("https://techie-webapp-api.onrender.com/saveuser",{
+        setSaving('Saving user data');
+        const response = await axios.post("http://localhost:9092/saveuser",{
           name: userName,
           email: userEmail,
           password: pwd,
           role: role
         });
         console.log("Response data: ",response.data)
+        setSaving('');
         if(response.data === "Email already exists"){
           setEmailExists(true);
           setTimeout(()=>{
@@ -134,6 +138,7 @@ const SignupForm = (props) => {
           console.log(response.data);
           console.log(response.accessToken)
           setSuccess(true);
+          setSaving('');
           props.onFormSwitch("login");
           // setTimeout(()=>{
           //   setIsSubmit(false);
@@ -143,6 +148,7 @@ const SignupForm = (props) => {
           // },"3000")
         }
       }else{
+        setSaving('');
         setIsInvalid(true);
         setTimeout(()=>{
           setIsInvalid(false);
@@ -259,6 +265,7 @@ const SignupForm = (props) => {
                     {isSubmit && secretKey && !isModerator && <small className='error-message'>Key does not match</small>}
                   </div>}
                 </div>
+                {saving.length>0 && <small className='inbetween-data'>{saving}</small>}
                 <button onClick={()=>setIsSubmit(true)} className='loginButt'>Sign up</button>
             </fieldset>
         </form>

@@ -9,20 +9,6 @@ const TakeTest = () => {
     // const [categ, setCateg] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(()=>{
-
-    //     if(localStorage.getItem('token')!==''){
-    //         axios.post("http://localhost:9092/checktoken",{toki: localStorage.getItem('token')}).then(res=>{
-    //             console.log(res.data);
-    //             if(res.data ==='Token invalid'){
-    //                 localStorage.removeItem('token');
-    //                 navigate('/');
-    //             }
-    //         })
-    //     }
-
-    // },[])
-
     const handleGeneral = () =>{
         navigate('general')
     }
