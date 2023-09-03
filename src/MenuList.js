@@ -1,7 +1,24 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const MenuList = (props) => {
+
+  const [backButtonClicked, setbackButtonClicked] = useState(false);
+  const navigate = useNavigate();
+
+  const handleEvent = () =>{
+    setbackButtonClicked(true);
+    navigate('/',{replace: true, state: {showMenu :props.showMenu(false)}});
+  }
+
+  useEffect(()=>{
+    window.addEventListener('popstate',handleEvent);
+    if(backButtonClicked){
+      props.showMenu(false);
+    }
+    return ()=>window.removeEventListener('popstate',handleEvent);
+  },[])
+
   return (
     <nav className='menu-list-container'>
         <ul>
