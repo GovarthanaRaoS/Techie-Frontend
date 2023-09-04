@@ -85,7 +85,7 @@ const ManageUserAccount = () => {
         // }
         if((role==='moderator' || role==='admin') && currentUser.email === email){
             if(window.confirm("Are you sure you want to delete your account?")){
-                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
                     console.log('Delete message: ',res.data);
                     localStorage.removeItem('token');
                     navigate('/');
@@ -102,7 +102,7 @@ const ManageUserAccount = () => {
         else if((role==='moderator' || role==='admin') && currentUser.role==='admin'){
             if(window.confirm(`Are you sure you want to delete the ${role}'s account?`)){
                 setIsFetching(true)
-                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+                axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
                     console.log('Delete message: ',res.data);
                     // navigate('/dashboard2/manageusers');
                     setIsFetching(true);

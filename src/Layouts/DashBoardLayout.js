@@ -110,9 +110,7 @@ const DashBoardLayout = () => {
     const handleAccountDeletion = () =>{
         if(window.confirm('Are you sure you want to delete your account?')){
             const email = user.email;
-            const isModerator = user.role==='moderator'?true:false;
-            const isAdmin = user.role==='admin'?true:false;
-            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`,{isModerator: isModerator, isAdmin: isAdmin}).then(res=>{
+            axios.delete(`https://techie-webapp-api.onrender.com/deleteuser/${email}`).then(res=>{
                 console.log('Delete message: ',res.data);
                 if(res.data==='Delete successfully'){
                     localStorage.removeItem('token');
