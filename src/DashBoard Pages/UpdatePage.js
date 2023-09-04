@@ -181,6 +181,9 @@ const UpdatePage = () => {
                     company_name: company
                 }).then(res=>{
                     console.log(res);
+                    setTimeout(()=>{
+                        setUpdating('');
+                    },3000);
                     console.log('Success');
                     setRefresh(true);
                     // navigate('/dashboard2');
@@ -340,6 +343,7 @@ const UpdatePage = () => {
                     <button type='submit' className='updateButt'>Update</button>
                     <button onClick={handleAccountDeletion} className='deleteButtRed'>Delete Account</button>
                 </div>
+                {isSubmitClicked && updating.length>0 && <div className="update-status"><small className='success-message'>Update Successful</small></div>}
             {/* </fieldset> */}
         </form>}
     </div>

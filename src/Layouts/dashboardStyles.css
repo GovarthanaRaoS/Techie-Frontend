@@ -438,6 +438,9 @@
 .deleteButtRed:hover{
     background-color: rgb(206, 0, 0);
 }
+.update-status{
+    text-align: center;
+}
 @media screen and (max-width: 1150px) {
     .welcome{
         text-align: center;
