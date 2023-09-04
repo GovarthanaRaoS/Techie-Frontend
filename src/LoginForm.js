@@ -23,6 +23,8 @@ const LoginForm = (props) => {
   const [loginPasswordTouched, setloginPasswordTouched] = useState(false);
   const [inValidCreds, setInvalidCreds] = useState(false);
 
+  const [databaseError, setDatabaseError] = useState(false);
+
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoginClicked, setIsLoginClicked] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -55,6 +57,11 @@ const LoginForm = (props) => {
         password : loginPassword,
       },{withCredentials: true});
       console.log("Response from server: ",response.data);
+      if(response.data.message === 'error'){
+        setLogging('');
+        setDatabaseError(true);
+        return;
+      }
       setLogging('');
       if(response.data === "Invalid credentials"){
         setInvalidCreds(true);
@@ -114,7 +121,8 @@ const LoginForm = (props) => {
                     {isLoginClicked && inValidCreds && <small className='error-message'>Invalid credentials</small>}
                     {isLoginClicked && accNot && <small className='error-message'>Account does not exist</small>}
                     {isLoginClicked && success && <small className='success-message'>Login Successful. Redirecting to dashboard</small>}
-                    {logging.length>0 && <small className='inbetween-data'>{logging}</small>}
+                    {logging.length>0 && !databaseError && <small className='inbetween-data'>{logging}</small>}
+                    {logging.length>0 && databaseError && <small className='inbetween-data'>Can't connect to database</small>}
                     <button className='loginButt'>Login</button>
                 </fieldset>
             </form>

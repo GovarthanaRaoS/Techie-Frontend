@@ -29,6 +29,8 @@ const SignupForm = (props) => {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
+    const [databaseError, setDatabaseError] = useState(false);
+
     const [role, setRole] = useState('');
 
     const [secretKey, setSecretKey] = useState('');
@@ -124,7 +126,12 @@ const SignupForm = (props) => {
           password: pwd,
           role: role
         });
-        console.log("Response data: ",response.data)
+        console.log("Response data: ",response.data);
+        if(response.data.message === 'error'){
+          setDatabaseError(true);
+          setSaving('');
+          return;
+        }
         setSaving('');
         if(response.data === "Email already exists"){
           setEmailExists(true);
@@ -265,7 +272,8 @@ const SignupForm = (props) => {
                     {isSubmit && secretKey && !isModerator && <small className='error-message'>Key does not match</small>}
                   </div>}
                 </div>
-                {saving.length>0 && <small className='inbetween-data'>{saving}</small>}
+                {saving.length>0 && !databaseError && <small className='inbetween-data'>{saving}</small>}
+                {saving.length>0 && databaseError && <small className='inbetween-data'>Can't connect to database</small>}
                 <button onClick={()=>setIsSubmit(true)} className='loginButt'>Sign up</button>
             </fieldset>
         </form>
