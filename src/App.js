@@ -31,6 +31,7 @@ import ManageUsers from './DashBoard Pages/ManageUsers';
 import ManageUsersLayout from './Layouts/ManageUsersLayout';
 import ManageUserAccount from './DashBoard Pages/ManageUserAccount';
 import AllScoreboard from './DashBoard Pages/AllScoreboard';
+import Services from './Services';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
         <Route index element={<LogSign/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/services' element={<Services/>}/>
         {/* <Route path='/showmembers' element={<ShowMembers/>}/> */}
       </Route>
       {/* <Route path='/dashboard' element={<Dashboard/>}/> */}

@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: 15px;
+    padding-block: 10px;
 }
 .title-logo{
     font-size: 32px;
@@ -82,10 +82,6 @@ footer{
     font-size: 32px;
     font-weight: bolder;
     /* font-family: 'Dancing Script', cursive; */
-}
-
-.copyright{
-    padding-block: 5px;
 }
 
 .login-register-container{
@@ -237,6 +233,7 @@ footer{
 }
 .menu-list-container ul{
     list-style: none;
+    padding-left: 0;
 }
 .menu-list-container li{
     margin-block: 10px;
@@ -302,6 +299,48 @@ footer{
 .inbetween-data{
     display: block;
 }
+.services-container{
+    margin-block: 15px;
+    background-color: #303030;
+    color: aliceblue;
+    padding: 30px;
+    border-radius: 25px;
+    width: 80%;
+    margin-inline: auto;
+}
+.services-container h3{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.copyright{
+    margin-inline: auto;
+    padding-block: 5px;
+    margin-bottom: 0; 
+    line-height: 1.8;
+    width: 80%;
+}
+.copyright a{
+    color: aliceblue;
+}
+.copyright a:hover{
+    color: wheat;
+}
+/* .copyright a{
+    text-decoration: none;
+    color: #303030;
+    margin-left: 5px;
+    padding: 6px 12px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    margin-top: 15px;
+    border: 0.3px solid #303030;
+    transition: all 0.3s ease-in-out;
+}
+.copyright a:hover{
+    border: 0.3px solid aliceblue;
+    color: aliceblue;
+    background-color: #303030;
+} */
 
 
 @media screen and (max-width: 1000px){
@@ -329,6 +368,9 @@ footer{
     }
     .description{
         margin-inline: auto;
+    }
+    .services-container p{
+        text-align: justify;
     }
 }
 @media screen and (max-width:350px) {
@@ -372,7 +414,7 @@ footer{
         color: aliceblue;
     }
     .menu-list-container li{
-        margin-block: 25px;
+        margin-block: 45px;
     }
     .menu-list-container ul{
         margin: auto 0; 

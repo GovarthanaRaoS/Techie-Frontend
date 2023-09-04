@@ -24,7 +24,7 @@ const MenuList = (props) => {
         <ul>
             <li><NavLink onClick={()=>props.showMenu(false)} to='/'>Home</NavLink></li>
             <li><NavLink to='/about' onClick={()=>props.showMenu(false)}>About</NavLink></li>
-            <li>Services</li>
+            <li><NavLink to='/services' onClick={()=>props.showMenu(false)}>Services</NavLink></li>
             <li onClick={()=>props.showMenu(false)}><NavLink to='/contact'>Contact</NavLink></li>
         </ul>
     </nav>

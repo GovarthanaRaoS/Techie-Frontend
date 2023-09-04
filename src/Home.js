@@ -103,7 +103,7 @@ const Home = (props) => {
             <ul className='menu-list'>
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/about">About</NavLink></li>
-                <li>Services</li>
+                <li><NavLink to="/services">Services</NavLink></li>
                 {/* <li><NavLink to="/showmembers">Show Members</NavLink></li> */}
                 <li><NavLink to='/contact'>Contact us</NavLink></li>
             </ul>
@@ -120,7 +120,7 @@ const Home = (props) => {
             {!isPending && serverErrorMsg && <p className='loading-message'>Sorry our server is down. Please try later</p>}
         </main>)}
         <footer>
-            <p className='copyright'>Copyright &copy;2023. Designed by Govarthana Rao S</p>
+            <p className='copyright'>Copyright &copy;2023. Designed by <a href="https://govarthan-portfolio.web.app/home">Govarthan</a></p>
         </footer>
     </div>
   )
