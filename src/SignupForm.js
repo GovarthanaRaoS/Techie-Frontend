@@ -130,6 +130,9 @@ const SignupForm = (props) => {
         if(response.data.message === 'error'){
           setDatabaseError(true);
           setSaving('');
+          setTimeout(()=>{
+            setIsSubmit(false);
+          },7000)
           return;
         }
         setSaving('');
@@ -273,7 +276,7 @@ const SignupForm = (props) => {
                   </div>}
                 </div>
                 {saving.length>0 && !databaseError && <small className='inbetween-data'>{saving}</small>}
-                {saving.length>0 && databaseError && <small className='inbetween-data'>Can't connect to database</small>}
+                {isSubmit && databaseError && <small className='inbetween-data'>Can't connect to database. Please try later.</small>}
                 <button onClick={()=>setIsSubmit(true)} className='loginButt'>Sign up</button>
             </fieldset>
         </form>

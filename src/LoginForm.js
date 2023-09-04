@@ -60,6 +60,9 @@ const LoginForm = (props) => {
       if(response.data.message === 'error'){
         setLogging('');
         setDatabaseError(true);
+        setTimeout(()=>{
+          setIsLoginClicked(false);
+        },7000)
         return;
       }
       setLogging('');
@@ -122,7 +125,7 @@ const LoginForm = (props) => {
                     {isLoginClicked && accNot && <small className='error-message'>Account does not exist</small>}
                     {isLoginClicked && success && <small className='success-message'>Login Successful. Redirecting to dashboard</small>}
                     {logging.length>0 && !databaseError && <small className='inbetween-data'>{logging}</small>}
-                    {logging.length>0 && databaseError && <small className='inbetween-data'>Can't connect to database</small>}
+                    {isLoginClicked && databaseError && <small className='inbetween-data'>Can't connect to database. Please try later</small>}
                     <button className='loginButt'>Login</button>
                 </fieldset>
             </form>
