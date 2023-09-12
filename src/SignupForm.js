@@ -264,12 +264,26 @@ const SignupForm = (props) => {
                   {isSubmit && role.length===0 && <small className='error-message'>Please select a role</small>}
                   {role==='admin' && 
                   <div className='secret-key-container'>
+                    <div className="secret-keys">
+                      <small className='und passkey'>For Recruiter's reference</small>
+                      <br />
+                      <small className='passkey'>Admin key - gopi1234</small>
+                      <br />
+                      <small className='passkey'>Moderator key - gova1234</small>
+                    </div>
                     <input type="text" placeholder='Please enter the Secret key' value={secretKey} onChange={(e)=>setSecretKey(e.target.value)} />
                     {isSubmit && secretKey.length === 0 && <small className='error-message'>Please enter the secret key</small>}
                     {isSubmit && secretKey && !isAdmin && <small className='error-message'>Key does not match</small>}
                   </div>}
                   {role==='moderator' && 
                   <div className='secret-key-container'>
+                    <div className="secret-keys">
+                      <small className='passkey'>For Recruiter's reference</small>
+                      <br />
+                      <small className='passkey'>Admin key - gopi1234</small>
+                      <br />
+                      <small className='passkey'>Moderator key - gova1234</small>
+                    </div>
                     <input type="text" placeholder='Please enter the Secret key' value={secretKey} onChange={(e)=>setSecretKey(e.target.value)} />
                     {isSubmit && secretKey.length === 0 && <small className='error-message'>Please enter the secret key</small>}
                     {isSubmit && secretKey && !isModerator && <small className='error-message'>Key does not match</small>}

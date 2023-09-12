@@ -341,6 +341,15 @@ footer{
     color: aliceblue;
     background-color: #303030;
 } */
+.passkey{
+    color: limegreen;
+}
+.secret-keys{
+    margin-block: 8px;
+}
+.und{
+    text-decoration: underline;
+}
 
 
 @media screen and (max-width: 1000px){
