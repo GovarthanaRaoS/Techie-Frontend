@@ -278,7 +278,7 @@ const SignupForm = (props) => {
                   {role==='moderator' && 
                   <div className='secret-key-container'>
                     <div className="secret-keys">
-                      <small className='passkey'>For Recruiter's reference</small>
+                      <small className='und passkey'>For Recruiter's reference</small>
                       <br />
                       <small className='passkey'>Admin key - gopi1234</small>
                       <br />
