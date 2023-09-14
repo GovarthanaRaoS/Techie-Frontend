@@ -125,7 +125,7 @@ const DashBoardLayout = () => {
   return (
     <div className='dashboard-container'>
         <header className='dash-header-container'>
-            <h2 className='title-logo'><Link to='/'>Techie</Link></h2>
+            <h2 className='title-logo'><Link to='/dashboard2'>Techie</Link></h2>
             <div className="user-options">
                 {/* <input type="checkbox" id='checkDash' value={isChecked} checked={isChecked} onChange={handleChecked}/><label htmlFor='checkDash' className='icon-menu' ref={iconRef}>=</label> */}
                 <input type="checkbox" id='checkDash' value={isChecked} checked={isChecked} onChange={handleChecked}/><label htmlFor='checkDash' className='icon-menu' ref={iconRef}>=</label>
@@ -157,7 +157,7 @@ const DashBoardLayout = () => {
             <Outlet/>
         </main>
         <footer>
-            <p className='copyright-dash'>Copyright &copy;2023. Designed by Govarthana</p>
+            <p className='copyright-dash'>Copyright &copy;2023. Designed by <a className='link-white' href="https://govarthan-portfolio.web.app/home">Govarthan</a></p>
         </footer>
     </div>
   )

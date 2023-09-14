@@ -441,6 +441,9 @@
 .update-status{
     text-align: center;
 }
+.link-white{
+    color: aliceblue;
+}
 @media screen and (max-width: 1150px) {
     .welcome{
         text-align: center;
