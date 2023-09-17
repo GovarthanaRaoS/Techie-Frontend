@@ -59,7 +59,7 @@ const AllScoreboard = () => {
             }).catch(err=>{
                 setIsPending(false);
                 setServerError(true);
-                console.log('Error up', err)
+                console.log('Error down', err)
             })
         }
     },[])
