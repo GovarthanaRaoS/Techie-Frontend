@@ -53,11 +53,13 @@ const AllScoreboard = () => {
                     }).catch(errr=>{
                         setIsPending(false);
                         setServerError(true);
+                        console.log('Error up', errr)
                     })
                 }
             }).catch(err=>{
                 setIsPending(false);
                 setServerError(true);
+                console.log('Error up', err)
             })
         }
     },[])
