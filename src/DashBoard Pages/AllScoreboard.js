@@ -36,12 +36,12 @@ const AllScoreboard = () => {
                     axios.get('https://techie-webapp-api.onrender.com/getscoreboard').then(res=>{
                         console.log('Response from scoreboard: ',res.data);
                         setUsersScoreboard(res.data);
-                        if(res.data[0].message === 'error'){
-                            console.log('Received Error: ',res.data[0].message);
-                            setErrMsg('Cannot connect to database')
-                            setIsPending(false);
-                            return;
-                        }
+                        // if(res.data[0].message === 'error'){
+                        //     console.log('Received Error: ',res.data[0].message);
+                        //     setErrMsg('Cannot connect to database')
+                        //     setIsPending(false);
+                        //     return;
+                        // }
                         if(res.data.length===0){
                             setIsPending(false);
                             setNoRecords('No records found')
