@@ -10,6 +10,9 @@
     justify-content: space-between;
     align-items: center;
 }
+.link-white{
+    color: aliceblue;
+}
 .title-logo{
     margin: 0;
 }
